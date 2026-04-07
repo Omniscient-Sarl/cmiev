@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { isValidLocale, locales, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
@@ -81,44 +80,49 @@ export default async function PractitionerPage({
         }}
       />
 
-      {/* Hero with practitioner image */}
-      <section className="relative h-[calc(100dvh-4rem)] overflow-hidden bg-secondary">
-        <Image
-          src={practitioner.image}
-          alt={practitioner.name}
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-        <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-12 sm:px-12 lg:pb-24">
+      {/* Typographic hero */}
+      <section className="relative flex h-[calc(100dvh-4rem)] flex-col justify-end overflow-hidden bg-primary px-6 pb-12 sm:px-12 lg:pb-24">
+        {/* Large decorative initials */}
+        <span
+          className="pointer-events-none absolute inset-0 flex items-center justify-center font-heading text-[12rem] font-bold text-primary-foreground/10 select-none sm:text-[16rem] lg:text-[20rem]"
+          aria-hidden="true"
+        >
+          {practitioner.name
+            .split(" ")
+            .map((w) => w[0])
+            .filter(Boolean)
+            .slice(0, 2)
+            .join("")
+            .toUpperCase()}
+        </span>
+
+        <div className="relative z-10">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="mb-4">
-            <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/70">
+            <ol className="flex flex-wrap items-center gap-1.5 text-sm text-primary-foreground/70">
               <li>
-                <Link href={`/${locale}`} className="hover:text-white transition-colors">
+                <Link href={`/${locale}`} className="hover:text-primary-foreground transition-colors">
                   {dict.practitioners.breadcrumbHome}
                 </Link>
               </li>
               <li aria-hidden="true">/</li>
               <li>
-                <Link href={`/${locale}/praticiens`} className="hover:text-white transition-colors">
+                <Link href={`/${locale}/praticiens`} className="hover:text-primary-foreground transition-colors">
                   {dict.practitioners.breadcrumbPractitioners}
                 </Link>
               </li>
               <li aria-hidden="true">/</li>
-              <li className="text-white font-medium">{practitioner.name}</li>
+              <li className="text-primary-foreground font-medium">{practitioner.name}</li>
             </ol>
           </nav>
 
-          <h1 className="font-heading text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+          <h1 className="font-heading text-3xl font-bold text-primary-foreground sm:text-4xl lg:text-5xl">
             {practitioner.name} — {practitioner.title[loc]}, Genève
           </h1>
-          <p className="mt-3 text-lg text-white/80">{practitioner.phone}</p>
+          <p className="mt-3 text-lg text-primary-foreground/80">{practitioner.phone}</p>
           {practitioner.email && (
-            <p className="mt-1 text-white/80">
-              <a href={`mailto:${practitioner.email}`} className="hover:text-white transition-colors underline underline-offset-2">
+            <p className="mt-1 text-primary-foreground/80">
+              <a href={`mailto:${practitioner.email}`} className="hover:text-primary-foreground transition-colors underline underline-offset-2">
                 {practitioner.email}
               </a>
             </p>

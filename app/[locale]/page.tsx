@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { Hero } from "@/components/sections/Hero";
@@ -76,6 +77,61 @@ export default async function HomePage({
           </div>
         </AnimatedSection>
       </SectionWrapper>
+      {/* Photo grid showcasing the centre */}
+      <section className="py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:grid-rows-2">
+              <div className="relative col-span-2 row-span-2 aspect-[4/3] overflow-hidden rounded-xl lg:aspect-auto">
+                <Image
+                  src="/images/galerie/cabinet-01.webp"
+                  alt="Salle de consultation du CMIEV, Genève"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+              </div>
+              <div className="relative aspect-square overflow-hidden rounded-xl">
+                <Image
+                  src="/images/galerie/cabinet-06.webp"
+                  alt="Espace de soins au Centre de Médecine Intégrative, Eaux-Vives"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                />
+              </div>
+              <div className="relative aspect-square overflow-hidden rounded-xl">
+                <Image
+                  src="/images/galerie/cabinet-03.webp"
+                  alt="Cabinet de thérapie au CMIEV, Genève"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                />
+              </div>
+              <div className="relative aspect-square overflow-hidden rounded-xl">
+                <Image
+                  src="/images/galerie/cabinet-08.webp"
+                  alt="Salle d'attente du CMIEV, Eaux-Vives"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                />
+              </div>
+              <div className="relative aspect-square overflow-hidden rounded-xl">
+                <Image
+                  src="/images/galerie/cabinet-04.webp"
+                  alt="Équipement Pilates au CMIEV, Genève"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 50vw, 25vw"
+                />
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       <SectionWrapper className="bg-secondary/50">
         <AnimatedSection>
           <h2 className="font-heading text-3xl font-bold text-foreground sm:text-4xl">
