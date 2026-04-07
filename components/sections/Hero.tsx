@@ -12,7 +12,7 @@ interface HeroProps {
 
 export function Hero({ title, subtitle, ctaText, ctaHref, imageSrc, imageAlt }: HeroProps) {
   return (
-    <section className="relative flex min-h-[60vh] items-center justify-center overflow-hidden">
+    <section className="relative flex h-[calc(100dvh-4rem)] items-center justify-center overflow-hidden">
       {imageSrc ? (
         <Image
           src={imageSrc}

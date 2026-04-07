@@ -82,50 +82,47 @@ export default async function PractitionerPage({
       />
 
       {/* Hero with practitioner image */}
-      <section className="relative bg-secondary">
-        <div className="mx-auto grid max-w-7xl lg:grid-cols-2">
-          <div className="relative aspect-[3/4] w-full lg:aspect-auto lg:min-h-[500px]">
-            <Image
-              src={practitioner.image}
-              alt={practitioner.name}
-              fill
-              className="object-cover"
-              priority
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-          </div>
-          <div className="flex flex-col justify-center px-6 py-12 sm:px-12 lg:py-24">
-            {/* Breadcrumb */}
-            <nav aria-label="Breadcrumb" className="mb-6">
-              <ol className="flex flex-wrap items-center gap-1.5 text-sm text-muted-foreground">
-                <li>
-                  <Link href={`/${locale}`} className="hover:text-foreground transition-colors">
-                    {dict.practitioners.breadcrumbHome}
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li>
-                  <Link href={`/${locale}/praticiens`} className="hover:text-foreground transition-colors">
-                    {dict.practitioners.breadcrumbPractitioners}
-                  </Link>
-                </li>
-                <li aria-hidden="true">/</li>
-                <li className="text-foreground font-medium">{practitioner.name}</li>
-              </ol>
-            </nav>
+      <section className="relative h-[calc(100dvh-4rem)] overflow-hidden bg-secondary">
+        <Image
+          src={practitioner.image}
+          alt={practitioner.name}
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+        <div className="relative z-10 flex h-full flex-col justify-end px-6 pb-12 sm:px-12 lg:pb-24">
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-4">
+            <ol className="flex flex-wrap items-center gap-1.5 text-sm text-white/70">
+              <li>
+                <Link href={`/${locale}`} className="hover:text-white transition-colors">
+                  {dict.practitioners.breadcrumbHome}
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li>
+                <Link href={`/${locale}/praticiens`} className="hover:text-white transition-colors">
+                  {dict.practitioners.breadcrumbPractitioners}
+                </Link>
+              </li>
+              <li aria-hidden="true">/</li>
+              <li className="text-white font-medium">{practitioner.name}</li>
+            </ol>
+          </nav>
 
-            <h1 className="font-heading text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
-              {practitioner.name} — {practitioner.title[loc]}, Genève
-            </h1>
-            <p className="mt-4 text-lg text-muted-foreground">{practitioner.phone}</p>
-            {practitioner.email && (
-              <p className="mt-1 text-muted-foreground">
-                <a href={`mailto:${practitioner.email}`} className="hover:text-primary transition-colors">
-                  {practitioner.email}
-                </a>
-              </p>
-            )}
-          </div>
+          <h1 className="font-heading text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
+            {practitioner.name} — {practitioner.title[loc]}, Genève
+          </h1>
+          <p className="mt-3 text-lg text-white/80">{practitioner.phone}</p>
+          {practitioner.email && (
+            <p className="mt-1 text-white/80">
+              <a href={`mailto:${practitioner.email}`} className="hover:text-white transition-colors underline underline-offset-2">
+                {practitioner.email}
+              </a>
+            </p>
+          )}
         </div>
       </section>
 
