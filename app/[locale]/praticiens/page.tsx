@@ -57,6 +57,7 @@ export default async function PractitionersPage({
                 title={p.title[locale as Locale]}
                 slug={p.slug}
                 locale={locale}
+                image={p.image}
                 phone={p.phone}
                 specialties={p.specialties[locale as Locale]}
                 ctaLabel={dict.practitioners.bookAppointment}

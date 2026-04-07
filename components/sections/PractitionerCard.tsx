@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -6,6 +7,7 @@ interface PractitionerCardProps {
   title: string;
   slug: string;
   locale: string;
+  image?: string;
   phone: string;
   specialties: string[];
   ctaLabel: string;
@@ -27,6 +29,7 @@ export function PractitionerCard({
   title,
   slug,
   locale,
+  image,
   phone,
   specialties,
   ctaLabel,
@@ -34,11 +37,23 @@ export function PractitionerCard({
   return (
     <Link href={`/${locale}/praticiens/${slug}`} className="group block focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none rounded-lg">
       <Card className="h-full overflow-hidden transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1">
-        <div className="flex aspect-[3/4] w-full items-center justify-center bg-primary">
-          <span className="font-heading text-6xl font-bold text-primary-foreground/90 select-none">
-            {getInitials(name)}
-          </span>
-        </div>
+        {image ? (
+          <div className="relative aspect-[3/4] w-full overflow-hidden">
+            <Image
+              src={image}
+              alt={name}
+              fill
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </div>
+        ) : (
+          <div className="flex aspect-[3/4] w-full items-center justify-center bg-primary">
+            <span className="font-heading text-6xl font-bold text-primary-foreground/90 select-none">
+              {getInitials(name)}
+            </span>
+          </div>
+        )}
         <CardContent className="p-6">
           <h3 className="font-heading text-xl font-semibold text-foreground">{name}</h3>
           <p className="mt-1 text-sm text-primary font-medium">{title}</p>
