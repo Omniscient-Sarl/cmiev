@@ -61,7 +61,7 @@ export const practitioners: Practitioner[] = [
         "Perineal disorders",
       ],
     },
-    image: "/images/practitioners/karen-aguiar.jpg",
+    image: "/images/praticiens/nopic.webp",
     seoKeywords: {
       fr: ["Physiothérapeute Genève", "Physiothérapie Eaux-Vives", "Karen Aguiar Genève"],
       en: ["Physiotherapist Geneva", "Physiotherapy Eaux-Vives", "Karen Aguiar Geneva"],
@@ -91,7 +91,7 @@ export const practitioners: Practitioner[] = [
       fr: ["Douleurs musculo-squelettiques", "Troubles fonctionnels", "Tensions corporelles"],
       en: ["Musculoskeletal pain", "Functional disorders", "Body tension"],
     },
-    image: "/images/practitioners/elio-bosani.jpg",
+    image: "/images/praticiens/nopic.webp",
     seoKeywords: {
       fr: ["Ostéopathe Genève", "Ostéopathie Eaux-Vives", "Elio Bosani Genève"],
       en: ["Osteopath Geneva", "Osteopathy Eaux-Vives", "Elio Bosani Geneva"],
@@ -133,7 +133,7 @@ export const practitioners: Practitioner[] = [
         "Intellectual disability",
       ],
     },
-    image: "/images/practitioners/corinne-dauve.jpg",
+    image: "/images/praticiens/nopic.webp",
     seoKeywords: {
       fr: ["Psychiatre Genève", "Psychiatrie Eaux-Vives", "Dr Corinne Dauve Genève"],
       en: ["Psychiatrist Geneva", "Psychiatry Eaux-Vives", "Dr Corinne Dauve Geneva"],
@@ -190,7 +190,7 @@ export const practitioners: Practitioner[] = [
         "Osteoarthritis",
       ],
     },
-    image: "/images/practitioners/isaline-henry.jpg",
+    image: "/images/praticiens/nopic.webp",
     seoKeywords: {
       fr: ["Physiothérapeute Genève", "Physiothérapie Eaux-Vives", "Isaline Henry Genève"],
       en: ["Physiotherapist Geneva", "Physiotherapy Eaux-Vives", "Isaline Henry Geneva"],
@@ -222,7 +222,7 @@ export const practitioners: Practitioner[] = [
       fr: ["Troubles chroniques", "Troubles fonctionnels", "Maladies inflammatoires"],
       en: ["Chronic disorders", "Functional disorders", "Inflammatory diseases"],
     },
-    image: "/images/practitioners/beatrice-milbert.jpg",
+    image: "/images/praticiens/nopic.webp",
     seoKeywords: {
       fr: ["Homéopathe Genève", "Homéopathie Eaux-Vives", "Béatrice Milbert Genève"],
       en: ["Homeopath Geneva", "Homeopathy Eaux-Vives", "Béatrice Milbert Geneva"],
@@ -274,7 +274,7 @@ export const practitioners: Practitioner[] = [
         "Energetic disorders",
       ],
     },
-    image: "/images/practitioners/shima-sazegari.jpg",
+    image: "/images/praticiens/nopic.webp",
     seoKeywords: {
       fr: [
         "Médecine intégrative Genève",
@@ -312,7 +312,7 @@ export const practitioners: Practitioner[] = [
       fr: ["Tensions fasciales", "Douleurs musculaires", "Troubles fonctionnels"],
       en: ["Fascial tension", "Muscle pain", "Functional disorders"],
     },
-    image: "/images/practitioners/severine-schwab.jpg",
+    image: "/images/praticiens/nopic.webp",
     seoKeywords: {
       fr: ["Fasciathérapeute Genève", "Fasciathérapie Eaux-Vives", "Séverine Schwab Genève"],
       en: ["Fascia therapist Geneva", "Fascia therapy Eaux-Vives", "Séverine Schwab Geneva"],
@@ -371,7 +371,7 @@ export const practitioners: Practitioner[] = [
         "Physical deconditioning",
       ],
     },
-    image: "/images/practitioners/fiorenza-toffolon.jpg",
+    image: "/images/praticiens/nopic.webp",
     seoKeywords: {
       fr: ["Pilates Genève", "Instructrice Pilates Eaux-Vives", "Fiorenza Toffolon Genève"],
       en: ["Pilates Geneva", "Pilates instructor Eaux-Vives", "Fiorenza Toffolon Geneva"],

@@ -60,6 +60,8 @@ export default async function HomePage({
         subtitle={dict.home.heroSubtitle}
         ctaText={dict.home.heroCta}
         ctaHref={`/${locale}/praticiens`}
+        imageSrc="/images/hero/accueil.webp"
+        imageAlt="Centre de Médecine Intégrative des Eaux-Vives, Genève"
       />
       <SectionWrapper>
         <AnimatedSection>

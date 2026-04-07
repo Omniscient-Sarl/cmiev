@@ -7,16 +7,16 @@ import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { GalleryGrid } from "@/components/sections/GalleryGrid";
 
 const galleryImages = [
-  { src: "/images/gallery/cabinet-1.jpg", key: "1" },
-  { src: "/images/gallery/cabinet-2.jpg", key: "2" },
-  { src: "/images/gallery/cabinet-3.jpg", key: "3" },
-  { src: "/images/gallery/cabinet-4.jpg", key: "4" },
-  { src: "/images/gallery/cabinet-5.jpg", key: "5" },
-  { src: "/images/gallery/cabinet-6.jpg", key: "6" },
-  { src: "/images/gallery/cabinet-7.jpg", key: "7" },
-  { src: "/images/gallery/cabinet-8.jpg", key: "8" },
-  { src: "/images/gallery/cabinet-9.jpg", key: "9" },
-  { src: "/images/gallery/cabinet-10.jpg", key: "10" },
+  { src: "/images/galerie/cabinet-01.webp", key: "1" },
+  { src: "/images/galerie/cabinet-02.webp", key: "2" },
+  { src: "/images/galerie/cabinet-03.webp", key: "3" },
+  { src: "/images/galerie/cabinet-04.webp", key: "4" },
+  { src: "/images/galerie/cabinet-05.webp", key: "5" },
+  { src: "/images/galerie/cabinet-06.webp", key: "6" },
+  { src: "/images/galerie/cabinet-07.webp", key: "7" },
+  { src: "/images/galerie/cabinet-08.webp", key: "8" },
+  { src: "/images/galerie/cabinet-09.webp", key: "9" },
+  { src: "/images/galerie/cabinet-10.webp", key: "10" },
 ];
 
 export async function generateMetadata({

@@ -40,7 +40,12 @@ export default async function PilatesPage({
 
   return (
     <>
-      <Hero title={dict.pilates.title} subtitle={dict.pilates.subtitle} />
+      <Hero
+        title={dict.pilates.title}
+        subtitle={dict.pilates.subtitle}
+        imageSrc="/images/pilates/pilates-hero.webp"
+        imageAlt="Séance de Pilates au CMIEV, Genève"
+      />
 
       <SectionWrapper>
         <AnimatedSection>
