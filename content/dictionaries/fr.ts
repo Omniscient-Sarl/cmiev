@@ -196,6 +196,7 @@ const fr = {
     copyright: "Centre de Médecine Intégrative des Eaux-Vives",
     address: "Rue des Eaux-Vives 3, 1207 Genève, Suisse",
     allRightsReserved: "Tous droits réservés",
+    developedBy: "Développé par",
   },
 } as const;
 

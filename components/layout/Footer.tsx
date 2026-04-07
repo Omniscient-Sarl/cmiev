@@ -20,6 +20,17 @@ export function Footer({ dict }: FooterProps) {
           <p className="text-sm text-muted-foreground">
             &copy; {year} {dict.footer.copyright}. {dict.footer.allRightsReserved}.
           </p>
+          <p className="text-sm text-muted-foreground">
+            {dict.footer.developedBy}{" "}
+            <a
+              href="https://omniscient.swiss"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-primary underline underline-offset-2 transition-colors hover:text-primary/80"
+            >
+              Omniscient S&agrave;rl
+            </a>
+          </p>
         </div>
       </div>
     </footer>

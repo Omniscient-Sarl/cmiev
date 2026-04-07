@@ -196,6 +196,7 @@ const en = {
     copyright: "Centre for Integrative Medicine, Eaux-Vives",
     address: "Rue des Eaux-Vives 3, 1207 Geneva, Switzerland",
     allRightsReserved: "All rights reserved",
+    developedBy: "Developed by",
   },
 } as const;
 
