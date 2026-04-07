@@ -36,8 +36,8 @@ export async function generateMetadata({
       canonical: `https://cmiev.ch/${locale}/galerie`,
       languages: { fr: "https://cmiev.ch/fr/galerie", en: "https://cmiev.ch/en/galerie" },
     },
-    openGraph: { title, description, url: `https://cmiev.ch/${locale}/galerie`, locale: locale === "fr" ? "fr_CH" : "en_GB", type: "website" },
-    twitter: { card: "summary_large_image", title, description },
+    openGraph: { title, description, url: `https://cmiev.ch/${locale}/galerie`, siteName: "CMIEV", locale: locale === "fr" ? "fr_CH" : "en_GB", type: "website", images: [{ url: "https://cmiev.ch/og-default.jpg", width: 1200, height: 630, alt: title }] },
+    twitter: { card: "summary_large_image", title, description, images: ["https://cmiev.ch/og-default.jpg"] },
   };
 }
 
