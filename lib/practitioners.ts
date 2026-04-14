@@ -21,6 +21,7 @@ export const practitioners: Practitioner[] = [
     },
     phone: "+41 22 700 53 33",
     email: "karenluana.aguiar@gmail.com",
+    image: "/images/praticiens/karen-aguiar.webp",
     bio: {
       fr: [
         "Karen Aguiar est physiothérapeute formée au Brésil et en activité à Genève depuis 2017. Son objectif est d\u2019accompagner ses patients vers une meilleure santé physique et un bien-être optimal.",
@@ -104,6 +105,7 @@ export const practitioners: Practitioner[] = [
       en: "Psychiatrist",
     },
     phone: "+41 76 223 80 16",
+    image: "/images/praticiens/corinne-dauve.webp",
     bio: {
       fr: [
         "Ancienne cheffe de clinique des Hôpitaux Universitaires de Genève dans l\u2019Unité de Psychiatrie du Développement Mental, le Docteur Corinne Dauve est spécialisée dans la prise en charge des patients atteints de déficience des facultés intellectuelles.",
@@ -146,6 +148,7 @@ export const practitioners: Practitioner[] = [
     },
     phone: "+41 22 700 53 33",
     email: "isalinehenry@gmail.com",
+    image: "/images/praticiens/isaline-henry.webp",
     bio: {
       fr: [
         "Isaline Henry travaille comme physiothérapeute depuis 2014. Elle accompagne les personnes concernées par des lésions traumatiques (entorse, fracture) mais aussi par des douleurs chroniques (lombalgie, cervicalgie, capsulite, arthrose de hanche et de genou).",
@@ -201,6 +204,7 @@ export const practitioners: Practitioner[] = [
       en: "Homeopath",
     },
     phone: "+41 22 566 01 50",
+    image: "/images/praticiens/beatrice-limbert.webp",
     bio: {
       fr: [
         "Diplômée d\u2019homéopathie de l\u2019Institut homéopathique scientifique, Béatrice Milbert est enseignante à l\u2019IHS et à l\u2019Académie libre de médecine intégrative à Genève (Acalmi.ch).",
@@ -232,6 +236,7 @@ export const practitioners: Practitioner[] = [
       en: "Pharmacist — Integrative Medicine Consultant",
     },
     phone: "+41 78 663 78 87",
+    image: "/images/praticiens/shima-sazegari.webp",
     bio: {
       fr: [
         "Diplômée de la faculté de pharmacie de l\u2019Université de Genève, Shima Sazegari travaille comme pharmacienne et consultante en médecine intégrative depuis plus de 25 ans à Genève. Pendant toutes ces années, elle s\u2019est intéressée et engagée pour le développement de la médecine naturelle en Suisse et en Europe.",
@@ -291,6 +296,7 @@ export const practitioners: Practitioner[] = [
       en: "Fascia Therapist",
     },
     phone: "+41 78 402 48 62",
+    image: "/images/praticiens/severine-schwab.webp",
     bio: {
       fr: [
         "Séverine Schwab est fasciathérapeute au CMIEV à Genève. La fasciathérapie est une thérapie manuelle douce qui s\u2019adresse aux fascias, ces membranes de tissu conjonctif qui enveloppent et relient toutes les structures du corps.",
@@ -321,6 +327,7 @@ export const practitioners: Practitioner[] = [
     },
     phone: "+41 76 698 42 25",
     email: "fiore.essential@gmail.com",
+    image: "/images/praticiens/fiorenza-toffolon.webp",
     bio: {
       fr: [
         "Fiorenza Toffolon, instructrice certifiée de Pilates depuis 2017, a découvert cette pratique lors de son expatriation à Singapour, après une blessure au dos. Le Pilates l\u2019a aidée à retrouver sa forme et est devenu essentiel à son bien-être.",
