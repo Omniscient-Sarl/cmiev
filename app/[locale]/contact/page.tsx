@@ -47,15 +47,83 @@ export default async function ContactPage({
         }}
       />
       <Hero title={dict.contact.title} subtitle={dict.contact.subtitle} />
-      <SectionWrapper>
-        <div className="grid gap-12 lg:grid-cols-2">
+      <SectionWrapper className="py-24 sm:py-28 lg:py-36">
+        <div className="grid gap-16 lg:grid-cols-2">
+          {/* Left column: Contact form */}
           <div className="relative">
+            <div className="mb-8">
+              <div className="mb-4 h-1 w-16 rounded-full bg-primary" />
+              <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                {dict.contact.title}
+              </h2>
+            </div>
             <ContactForm dict={dict.contact} />
           </div>
-          <div>
-            <h2 className="font-heading text-2xl font-bold text-foreground">{dict.contact.mapTitle}</h2>
-            <p className="mt-2 text-muted-foreground">{dict.contact.address}</p>
-            <div className="mt-6 aspect-[4/3] w-full overflow-hidden rounded-lg">
+
+          {/* Right column: Contact info card + Map */}
+          <div className="space-y-8">
+            <div>
+              <div className="mb-4 h-1 w-16 rounded-full bg-primary" />
+              <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                {dict.contact.mapTitle}
+              </h2>
+            </div>
+
+            {/* Contact info card */}
+            <div className="rounded-2xl bg-white p-6 shadow-md sm:p-8">
+              <div className="space-y-5">
+                {/* Address */}
+                <div className="flex items-start gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">
+                      {locale === "fr" ? "Adresse" : "Address"}
+                    </p>
+                    <p className="mt-1 text-sm text-muted-foreground">{dict.contact.address}</p>
+                  </div>
+                </div>
+
+                {/* Phone */}
+                <div className="flex items-start gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">
+                      {locale === "fr" ? "Telephone" : "Phone"}
+                    </p>
+                    <a href="tel:+41227001100" className="mt-1 block text-sm text-muted-foreground transition-colors hover:text-primary">
+                      +41 22 700 11 00
+                    </a>
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div className="flex items-start gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">Email</p>
+                    <a href="mailto:info@cmiev.ch" className="mt-1 block text-sm text-muted-foreground transition-colors hover:text-primary">
+                      info@cmiev.ch
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Map */}
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-md">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5522.754410053824!2d6.151762003117918!3d46.20295078382232!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c653137f99337%3A0xc5c0c9e8b14070f9!2sRue%20des%20Eaux-Vives%203%2C%201207%20Gen%C3%A8ve!5e0!3m2!1sfr!2sch!4v1739734951508!5m2!1sfr!2sch"
                 width="100%"

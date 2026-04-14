@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { Hero } from "@/components/sections/Hero";
@@ -29,6 +30,49 @@ export async function generateMetadata({
   };
 }
 
+/* Benefit card icons as inline SVGs */
+function PostureIcon() {
+  return (
+    <svg className="h-7 w-7 text-primary" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+    </svg>
+  );
+}
+
+function MuscleIcon() {
+  return (
+    <svg className="h-7 w-7 text-primary" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+    </svg>
+  );
+}
+
+function FlexIcon() {
+  return (
+    <svg className="h-7 w-7 text-primary" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09Z" />
+    </svg>
+  );
+}
+
+function MindIcon() {
+  return (
+    <svg className="h-7 w-7 text-primary" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+    </svg>
+  );
+}
+
+function ShieldIcon() {
+  return (
+    <svg className="h-7 w-7 text-primary" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+    </svg>
+  );
+}
+
+const benefitIcons = [PostureIcon, MuscleIcon, FlexIcon, MindIcon, ShieldIcon];
+
 export default async function PilatesPage({
   params,
 }: {
@@ -40,6 +84,7 @@ export default async function PilatesPage({
 
   return (
     <>
+      {/* ─── Hero ─── */}
       <Hero
         title={dict.pilates.title}
         subtitle={dict.pilates.subtitle}
@@ -47,69 +92,173 @@ export default async function PilatesPage({
         imageAlt="Séance de Pilates au CMIEV, Genève"
       />
 
+      {/* ─── What is Pilates ─── */}
       <SectionWrapper>
         <AnimatedSection>
-          <h2 className="font-heading text-3xl font-bold text-foreground">{dict.pilates.whatIsTitle}</h2>
-          <div className="mt-6 max-w-3xl space-y-4 text-muted-foreground leading-relaxed">
-            <p>{dict.pilates.whatIsP1}</p>
-            <p>{dict.pilates.whatIsP2}</p>
-            <p>{dict.pilates.whatIsP3}</p>
-            <p>{dict.pilates.whatIsP4}</p>
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+            {/* Text column */}
+            <div>
+              <div className="mb-4 h-1 w-16 rounded-full bg-primary" aria-hidden="true" />
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold tracking-tight text-foreground">
+                {dict.pilates.whatIsTitle}
+              </h2>
+              <div className="mt-6 space-y-4">
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  {dict.pilates.whatIsP1}
+                </p>
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  {dict.pilates.whatIsP2}
+                </p>
+              </div>
+            </div>
+
+            {/* Image column */}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg">
+              <Image
+                src="/images/galerie/cabinet-04.webp"
+                alt="Équipement Pilates au CMIEV"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+            </div>
           </div>
         </AnimatedSection>
       </SectionWrapper>
 
-      <SectionWrapper className="bg-secondary/50">
+      {/* ─── Benefits ─── */}
+      <SectionWrapper variant="cream">
         <AnimatedSection>
-          <h2 className="font-heading text-3xl font-bold text-foreground">{dict.pilates.benefitsTitle}</h2>
-          <p className="mt-4 text-muted-foreground">{dict.pilates.benefitsIntro}</p>
-          <ul className="mt-6 space-y-3">
-            {dict.pilates.benefits.map((b) => (
-              <li key={b} className="flex items-center gap-3 text-foreground">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
-                  </svg>
-                </span>
-                {b}
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 text-muted-foreground">{dict.pilates.benefitsClosing}</p>
+          <div className="text-center">
+            <div className="mx-auto mb-4 h-1 w-16 rounded-full bg-primary" aria-hidden="true" />
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold tracking-tight text-foreground">
+              {dict.pilates.benefitsTitle}
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              {dict.pilates.benefitsIntro}
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {dict.pilates.benefits.map((b, i) => {
+              const Icon = benefitIcons[i] ?? benefitIcons[0];
+              return (
+                <div
+                  key={b}
+                  className="flex items-start gap-4 rounded-2xl bg-white p-6 shadow-md"
+                >
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                    <Icon />
+                  </span>
+                  <p className="text-base font-medium text-foreground leading-relaxed pt-2.5">
+                    {b}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+
+          <p className="mx-auto mt-10 max-w-3xl text-center text-muted-foreground">
+            {dict.pilates.benefitsClosing}
+          </p>
         </AnimatedSection>
       </SectionWrapper>
 
+      {/* ─── Sessions ─── */}
       <SectionWrapper>
         <AnimatedSection>
-          <h2 className="font-heading text-3xl font-bold text-foreground">{dict.pilates.sessionsTitle}</h2>
-          <div className="mt-6 max-w-3xl space-y-4 text-muted-foreground leading-relaxed">
-            <p>{dict.pilates.sessionsP1}</p>
-            <p>{dict.pilates.sessionsP2}</p>
-            <p>{dict.pilates.sessionsP3}</p>
+          <div className="mx-auto max-w-3xl text-center">
+            <div className="mx-auto mb-4 h-1 w-16 rounded-full bg-primary" aria-hidden="true" />
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold tracking-tight text-foreground">
+              {dict.pilates.sessionsTitle}
+            </h2>
+          </div>
+          <div className="mx-auto mt-8 max-w-3xl space-y-5">
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              {dict.pilates.sessionsP1}
+            </p>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              {dict.pilates.sessionsP2}
+            </p>
+            <p className="text-lg leading-relaxed text-muted-foreground">
+              {dict.pilates.sessionsP3}
+            </p>
           </div>
         </AnimatedSection>
       </SectionWrapper>
 
-      <SectionWrapper className="bg-secondary/50">
+      {/* ─── Pricing ─── */}
+      <SectionWrapper variant="cream">
         <AnimatedSection>
-          <h2 className="font-heading text-3xl font-bold text-foreground">{dict.pilates.pricingTitle}</h2>
-          <ul className="mt-6 space-y-3">
-            {dict.pilates.pricing.map((p) => (
-              <li key={p} className="text-lg text-foreground font-medium">{p}</li>
-            ))}
-          </ul>
-          <p className="mt-4 text-sm text-primary font-medium">{dict.pilates.pricingDiscount}</p>
-          <p className="mt-2 text-muted-foreground">{dict.pilates.pricingNote}</p>
+          <div className="text-center">
+            <div className="mx-auto mb-4 h-1 w-16 rounded-full bg-primary" aria-hidden="true" />
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold tracking-tight text-foreground">
+              {dict.pilates.pricingTitle}
+            </h2>
+          </div>
+
+          <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {dict.pilates.pricing.map((p, i) => {
+              /* Extract price from string like "CHF 130.— par session" */
+              const priceMatch = p.match(/CHF\s[\d\u2019'.]+/);
+              const price = priceMatch ? priceMatch[0] : "";
+              const label = p.replace(price, "").replace(/^[\s—\-–]+|[\s—\-–]+$/g, "").trim();
+              const isBestValue = i === 2;
+
+              return (
+                <div
+                  key={p}
+                  className={`relative flex flex-col items-center rounded-2xl bg-white p-8 shadow-md text-center ${
+                    isBestValue ? "ring-2 ring-primary" : ""
+                  }`}
+                >
+                  {isBestValue && (
+                    <span className="absolute -top-3.5 rounded-full bg-primary px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white">
+                      Best value
+                    </span>
+                  )}
+                  <span className="mt-2 text-3xl font-bold tracking-tight text-foreground">
+                    {price}
+                  </span>
+                  <span className="mt-2 text-sm text-muted-foreground">{label}</span>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="mx-auto mt-8 max-w-xl text-center">
+            <p className="text-lg font-semibold text-primary">
+              {dict.pilates.pricingDiscount}
+            </p>
+            <p className="mt-2 text-muted-foreground">
+              {dict.pilates.pricingNote}
+            </p>
+          </div>
         </AnimatedSection>
       </SectionWrapper>
 
-      <SectionWrapper>
+      {/* ─── Qualitop Trust Banner ─── */}
+      <SectionWrapper variant="sage">
         <AnimatedSection>
-          <h2 className="font-heading text-3xl font-bold text-foreground">{dict.pilates.qualitopTitle}</h2>
-          <p className="mt-4 text-muted-foreground">{dict.pilates.qualitopText}</p>
+          <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:text-left sm:gap-6">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/10">
+              <svg className="h-7 w-7 text-primary" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+              </svg>
+            </span>
+            <div>
+              <h2 className="text-xl font-heading font-bold text-foreground">
+                {dict.pilates.qualitopTitle}
+              </h2>
+              <p className="mt-1 text-muted-foreground">
+                {dict.pilates.qualitopText}
+              </p>
+            </div>
+          </div>
         </AnimatedSection>
       </SectionWrapper>
 
+      {/* ─── Contact CTA ─── */}
       <ContactCta
         title={dict.pilates.contactTitle}
         description={`${dict.pilates.contactName} — ${dict.pilates.contactPhone}`}

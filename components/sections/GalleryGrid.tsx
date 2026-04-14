@@ -5,9 +5,11 @@ import Image from "next/image";
 
 interface GalleryGridProps {
   images: { src: string; alt: string }[];
+  gridClassName?: string;
+  featuredFirst?: boolean;
 }
 
-export function GalleryGrid({ images }: GalleryGridProps) {
+export function GalleryGrid({ images, gridClassName, featuredFirst }: GalleryGridProps) {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const close = useCallback(() => setSelectedIndex(null), []);
@@ -25,22 +27,23 @@ export function GalleryGrid({ images }: GalleryGridProps) {
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className={gridClassName ?? "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"}>
         {images.map((img, i) => (
           <button
             key={img.src}
             type="button"
             onClick={() => setSelectedIndex(i)}
-            className="group relative aspect-[4/3] overflow-hidden rounded-lg bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+            className={`group relative overflow-hidden rounded-2xl bg-secondary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none ${featuredFirst && i === 0 ? "col-span-2 row-span-2" : "aspect-[4/3]"}`}
             aria-label={img.alt}
           >
             <Image
               src={img.src}
               alt={img.alt}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
+            <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
           </button>
         ))}
       </div>

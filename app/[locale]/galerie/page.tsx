@@ -59,7 +59,11 @@ export default async function GalleryPage({
     <>
       <Hero title={dict.gallery.title} subtitle={dict.gallery.subtitle} />
       <SectionWrapper>
-        <GalleryGrid images={images} />
+        <GalleryGrid
+          images={images}
+          gridClassName="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4"
+          featuredFirst
+        />
       </SectionWrapper>
     </>
   );

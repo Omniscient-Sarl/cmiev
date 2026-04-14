@@ -50,8 +50,16 @@ export default async function PractitionersPage({
   return (
     <>
       <Hero title={dict.practitioners.title} subtitle={dict.practitioners.subtitle} />
+
       <SectionWrapper>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="mx-auto mb-4 block h-1 w-16 rounded-full bg-accent" />
+          <h2 className="font-heading text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+            {dict.practitioners.subtitle}
+          </h2>
+        </div>
+
+        <div className="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {practitioners.map((p) => (
             <AnimatedSection key={p.slug}>
               <PractitionerCard
