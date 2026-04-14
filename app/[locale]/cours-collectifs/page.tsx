@@ -32,8 +32,8 @@ export async function generateMetadata({
 
 const whyJoinImages = [
   { src: "/images/pilates/pilates-group-1.webp", alt: "Group pilates session" },
-  { src: "/images/cours/group-class-1.webp", alt: "Wellness group class" },
   { src: "/images/cours/group-class-3.webp", alt: "Fitness group training" },
+  { src: "/images/cours/group-class-1.webp", alt: "Wellness group class" },
 ];
 
 const dayBgColors = [
@@ -174,8 +174,8 @@ export default async function GroupClassesPage({
                     {i === 0
                       ? (locale === "fr" ? "Pilates en groupe" : "Group Pilates")
                       : i === 1
-                        ? (locale === "fr" ? "Cours collectifs" : "Group Classes")
-                        : (locale === "fr" ? "Bien-être" : "Wellness")}
+                        ? (locale === "fr" ? "Bien-être" : "Wellness")
+                        : (locale === "fr" ? "Cours collectifs" : "Group Classes")}
                   </p>
                 </div>
               </div>

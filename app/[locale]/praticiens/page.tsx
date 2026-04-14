@@ -1,12 +1,23 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { getVisiblePractitioners } from "@/lib/db/queries";
-import { Hero } from "@/components/sections/Hero";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { AnimatedSection } from "@/components/sections/AnimatedSection";
 import { PractitionerCard } from "@/components/sections/PractitionerCard";
+
+const practitionerPhotos = [
+  { src: "/images/praticiens/karen-aguiar.webp", name: "Karen Aguiar" },
+  { src: "/images/praticiens/elio-bosani.webp", name: "Elio Bosani" },
+  { src: "/images/praticiens/corinne-dauve.webp", name: "Dr Corinne Dauve" },
+  { src: "/images/praticiens/isaline-henry.webp", name: "Isaline Henry" },
+  { src: "/images/praticiens/beatrice-limbert.webp", name: "Béatrice Milbert" },
+  { src: "/images/praticiens/shima-sazegari.webp", name: "Shima Sazegari" },
+  { src: "/images/praticiens/severine-schwab.webp", name: "Séverine Schwab" },
+  { src: "/images/praticiens/fiorenza-toffolon.webp", name: "Fiorenza Toffolon" },
+];
 
 export async function generateMetadata({
   params,
@@ -51,7 +62,40 @@ export default async function PractitionersPage({
 
   return (
     <>
-      <Hero title={dict.practitioners.title} subtitle={dict.practitioners.subtitle} />
+      {/* Practitioner Mosaic Hero */}
+      <section className="relative h-[calc(100dvh-4rem)] overflow-hidden">
+        <div className="absolute inset-0 grid grid-cols-4 grid-rows-2 lg:grid-cols-8 lg:grid-rows-1">
+          {practitionerPhotos.map((p) => (
+            <div key={p.name} className="relative overflow-hidden">
+              <Image
+                src={p.src}
+                alt={p.name}
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 25vw, 12.5vw"
+                priority
+              />
+            </div>
+          ))}
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/30" />
+
+        <div className="relative z-10 flex h-full w-full flex-col justify-end px-6 pb-24 sm:px-12 lg:px-20 lg:pb-28">
+          <div className="mb-6 h-px w-16 bg-accent sm:w-24" />
+          <h1 className="font-heading text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+            {dict.practitioners.title}
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg text-white/90 sm:text-xl lg:text-2xl">
+            {dict.practitioners.subtitle}
+          </p>
+        </div>
+
+        <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center">
+          <div className="animate-bounce">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/60"><path d="M6 9l6 6 6-6" /></svg>
+          </div>
+        </div>
+      </section>
 
       <SectionWrapper>
         <div className="mx-auto max-w-3xl text-center">
