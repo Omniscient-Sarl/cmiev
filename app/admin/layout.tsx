@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { users } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { AdminSidebar } from "@/components/admin/AdminSidebar";
+import { SignOutButton } from "@/components/admin/SignOutButton";
 
 export const metadata = { title: "Admin — CMIEV" };
 
@@ -23,6 +24,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
           <div className="max-w-md text-center p-8">
             <h1 className="font-heading text-2xl font-bold mb-4">Access Pending</h1>
             <p className="text-muted-foreground">Your access request is pending approval. You will receive an email when your account has been reviewed.</p>
+            <SignOutButton />
           </div>
         </body>
       </html>
@@ -42,6 +44,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
                 ? "Your access request is pending approval. You will receive an email when your account has been reviewed."
                 : "Your access request has been denied. Please contact the administrator."}
             </p>
+            <SignOutButton />
           </div>
         </body>
       </html>
