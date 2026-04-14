@@ -110,10 +110,10 @@ export default async function HomePage({
       />
 
       {/* Trust / Stats Bar */}
-      <section className="relative z-10 -mt-16 sm:-mt-20">
+      <section className="relative z-10 -mt-12 sm:-mt-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
-            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white shadow-xl lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white shadow-xl sm:grid-cols-4">
               {[
                 { value: "8", label: dict.home.statsSpecialists },
                 { value: "Genève", label: dict.home.statsLocation },
@@ -122,12 +122,12 @@ export default async function HomePage({
               ].map((stat) => (
                 <div
                   key={stat.label}
-                  className="flex flex-col items-center justify-center px-4 py-6 text-center sm:py-8"
+                  className="flex flex-col items-center justify-center px-3 py-4 text-center sm:px-4 sm:py-8"
                 >
-                  <span className="font-heading text-3xl font-bold text-primary sm:text-4xl">
+                  <span className="font-heading text-2xl font-bold text-primary sm:text-4xl">
                     {stat.value}
                   </span>
-                  <span className="mt-1 text-sm text-muted-foreground sm:text-base">
+                  <span className="mt-1 text-xs text-muted-foreground sm:text-base">
                     {stat.label}
                   </span>
                 </div>
@@ -255,7 +255,7 @@ export default async function HomePage({
           <div className="mt-12 text-center">
             <Link
               href={`/${locale}/praticiens`}
-              className="inline-flex items-center gap-2 rounded-xl border-2 border-primary px-8 py-4 font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-white"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-primary px-8 py-4 font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-white sm:inline-flex sm:w-auto"
             >
               {dict.home.teamCta}
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">
@@ -303,7 +303,7 @@ export default async function HomePage({
           <div className="mt-10 text-center">
             <Link
               href={`/${locale}/galerie`}
-              className="inline-flex items-center gap-2 rounded-xl border-2 border-primary px-8 py-4 font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-white"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border-2 border-primary px-8 py-4 font-semibold text-primary transition-all duration-300 hover:bg-primary hover:text-white sm:inline-flex sm:w-auto"
             >
               {dict.home.galleryCta}
               <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" aria-hidden="true">

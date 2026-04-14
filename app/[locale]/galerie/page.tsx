@@ -60,7 +60,7 @@ export default async function GalleryPage({
   return (
     <>
       {/* Marquee Hero */}
-      <section className="relative h-[calc(100dvh-4rem)] overflow-hidden">
+      <section className="relative flex h-[calc(100dvh-5rem)] overflow-hidden">
         <div className="absolute inset-0 flex items-center">
           <div className="flex h-full animate-[marquee_60s_linear_infinite] will-change-transform">
             {[...marqueeImages, ...marqueeImages].map((src, i) => (
@@ -79,20 +79,14 @@ export default async function GalleryPage({
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/20" />
 
-        <div className="relative z-10 flex h-full w-full flex-col justify-end px-6 pb-24 sm:px-12 lg:px-20 lg:pb-28">
-          <div className="mb-6 h-px w-16 bg-accent sm:w-24" />
-          <h1 className="font-heading text-5xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
+        <div className="relative z-10 flex w-full flex-col justify-end px-4 pb-12 sm:px-12 sm:pb-24 lg:px-20 lg:pb-28">
+          <div className="mb-4 h-px w-16 bg-accent sm:mb-6 sm:w-24" />
+          <h1 className="font-heading text-4xl font-bold tracking-tight text-white sm:text-6xl lg:text-7xl">
             {dict.gallery.title}
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-white/90 sm:text-xl lg:text-2xl">
+          <p className="mt-4 max-w-2xl text-base text-white/90 sm:mt-6 sm:text-xl lg:text-2xl">
             {dict.gallery.subtitle}
           </p>
-        </div>
-
-        <div className="absolute inset-x-0 bottom-6 z-10 flex justify-center">
-          <div className="animate-bounce">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white/60"><path d="M6 9l6 6 6-6" /></svg>
-          </div>
         </div>
       </section>
       <SectionWrapper>

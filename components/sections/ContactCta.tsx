@@ -9,7 +9,7 @@ interface ContactCtaProps {
 
 export function ContactCta({ title, description, buttonText, href }: ContactCtaProps) {
   return (
-    <section className="relative overflow-hidden bg-primary py-20 sm:py-28 lg:py-36">
+    <section className="relative overflow-hidden bg-primary py-16 sm:py-28 lg:py-36">
       {/* Subtle radial gradient overlay */}
       <div
         className="pointer-events-none absolute inset-0 opacity-30"
@@ -30,7 +30,7 @@ export function ContactCta({ title, description, buttonText, href }: ContactCtaP
         <div className="mt-10">
           <Link
             href={href}
-            className="inline-flex items-center rounded-xl bg-accent px-10 py-5 text-lg font-semibold text-accent-foreground shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+            className="flex w-full items-center justify-center rounded-xl bg-accent px-10 py-5 text-base font-semibold text-accent-foreground shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none sm:inline-flex sm:w-auto sm:text-lg"
           >
             {buttonText}
           </Link>

@@ -74,8 +74,6 @@ export default async function PractitionerPage({
 
   const hasImage = !!practitioner.image;
   const textColor = hasImage ? "text-white" : "text-primary-foreground";
-  const mutedColor = hasImage ? "text-white/70" : "text-primary-foreground/70";
-  const hoverColor = hasImage ? "hover:text-white" : "hover:text-primary-foreground";
 
   return (
     <>
@@ -93,7 +91,7 @@ export default async function PractitionerPage({
       />
 
       {/* Hero */}
-      <section className="relative flex h-[calc(100dvh-4rem)] flex-col justify-end overflow-hidden bg-primary">
+      <section className="relative flex h-[calc(100dvh-5rem)] flex-col justify-end overflow-hidden bg-primary">
         {hasImage ? (
           <>
             <Image
@@ -121,63 +119,55 @@ export default async function PractitionerPage({
           </span>
         )}
 
-        <div className="relative z-10 px-6 pb-16 sm:px-12 lg:px-20 lg:pb-24">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className={`flex flex-wrap items-center gap-2 text-xs tracking-wide uppercase ${mutedColor}`}>
-              <li>
-                <Link href={`/${locale}`} className={`transition-colors ${hoverColor}`}>
-                  {dict.practitioners.breadcrumbHome}
-                </Link>
-              </li>
-              <li aria-hidden="true">
-                <svg className="h-3 w-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </li>
-              <li>
-                <Link href={`/${locale}/praticiens`} className={`transition-colors ${hoverColor}`}>
-                  {dict.practitioners.breadcrumbPractitioners}
-                </Link>
-              </li>
-              <li aria-hidden="true">
-                <svg className="h-3 w-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-              </li>
-              <li className={`font-medium ${textColor}`}>{practitioner.name}</li>
-            </ol>
-          </nav>
+        <div className="relative z-10 px-4 pb-12 sm:px-12 sm:pb-16 lg:px-20 lg:pb-24">
+          <div className="mb-4 h-px w-16 bg-accent sm:mb-6 sm:w-24" />
 
-          {/* Name & Title */}
           <h1 className={`font-heading text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl ${textColor}`}>
             {practitioner.name}
           </h1>
-          <p className={`mt-3 text-lg font-light tracking-wide sm:text-xl ${hasImage ? "text-white/80" : "text-primary-foreground/80"}`}>
+          <p className={`mt-3 text-base font-light tracking-wide sm:text-xl ${hasImage ? "text-white/80" : "text-primary-foreground/80"}`}>
             {practitioner.title[loc]}, Genève
           </p>
 
-          {/* Contact info */}
-          <div className={`mt-6 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm ${hasImage ? "text-white/80" : "text-primary-foreground/80"}`}>
-            {practitioner.phone && (
-              <a href={`tel:${practitioner.phone.replace(/\s/g, "")}`} className={`inline-flex items-center gap-2 transition-colors ${hoverColor}`}>
-                <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                </svg>
-                {practitioner.phone}
-              </a>
-            )}
-            {practitioner.email && (
-              <a href={`mailto:${practitioner.email}`} className={`inline-flex items-center gap-2 transition-colors ${hoverColor}`}>
-                <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
-                </svg>
-                {practitioner.email}
-              </a>
-            )}
+          <div className="mt-8 sm:mt-10">
+            <Link
+              href="#contact"
+              className="flex w-full items-center justify-center rounded-xl bg-accent px-8 py-4 text-base font-semibold text-accent-foreground shadow-lg shadow-accent/25 transition-all duration-200 hover:scale-105 hover:shadow-xl hover:shadow-accent/30 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none sm:inline-flex sm:w-auto sm:text-lg"
+            >
+              {dict.practitioners.bookAppointment}
+            </Link>
           </div>
         </div>
       </section>
+
+      {/* Breadcrumb */}
+      <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+        <nav aria-label="Breadcrumb">
+          <ol className="flex flex-wrap items-center gap-2 text-xs tracking-wide uppercase text-muted-foreground">
+            <li>
+              <Link href={`/${locale}`} className="transition-colors hover:text-foreground">
+                {dict.practitioners.breadcrumbHome}
+              </Link>
+            </li>
+            <li aria-hidden="true">
+              <svg className="h-3 w-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </li>
+            <li>
+              <Link href={`/${locale}/praticiens`} className="transition-colors hover:text-foreground">
+                {dict.practitioners.breadcrumbPractitioners}
+              </Link>
+            </li>
+            <li aria-hidden="true">
+              <svg className="h-3 w-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </li>
+            <li className="font-medium text-foreground">{practitioner.name}</li>
+          </ol>
+        </nav>
+      </div>
 
       {/* Bio & Sidebar */}
       <SectionWrapper>
@@ -185,6 +175,25 @@ export default async function PractitionerPage({
           {/* Bio */}
           <div className="lg:col-span-2">
             <AnimatedSection>
+              {/* Contact info */}
+              <div className="mb-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-muted-foreground">
+                {practitioner.phone && (
+                  <a href={`tel:${practitioner.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 transition-colors hover:text-primary">
+                    <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                    </svg>
+                    {practitioner.phone}
+                  </a>
+                )}
+                {practitioner.email && (
+                  <a href={`mailto:${practitioner.email}`} className="inline-flex items-center gap-2 transition-colors hover:text-primary">
+                    <svg className="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                    </svg>
+                    {practitioner.email}
+                  </a>
+                )}
+              </div>
               <div className="mb-4 h-1 w-12 rounded-full bg-primary" aria-hidden="true" />
               <h2 className="font-heading text-2xl font-bold text-foreground sm:text-3xl">
                 {dict.practitioners.biography}
@@ -240,7 +249,7 @@ export default async function PractitionerPage({
 
       {/* Per-practitioner contact form */}
       {practitioner.email && (
-        <SectionWrapper variant="cream">
+        <SectionWrapper variant="cream" id="contact">
           <AnimatedSection>
             <div className="mx-auto max-w-2xl">
               <div className="text-center">
