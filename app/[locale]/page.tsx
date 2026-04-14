@@ -281,9 +281,9 @@ export default async function HomePage({
           <div className="mt-12 grid grid-cols-2 gap-4 sm:mt-16 lg:grid-cols-4">
             {[
               { src: "/images/galerie/cabinet-01.webp", alt: "Salle de consultation CMIEV" },
-              { src: "/images/galerie/cabinet-03.webp", alt: "Cabinet de thérapie CMIEV" },
-              { src: "/images/galerie/cabinet-06.webp", alt: "Espace de soins CMIEV" },
-              { src: "/images/galerie/cabinet-08.webp", alt: "Salle d'attente CMIEV" },
+              { src: "/images/pilates/pilates-reformer-1.webp", alt: "Pilates reformer session" },
+              { src: "/images/physiotherapy/physio-treatment-2.webp", alt: "Physiotherapy treatment" },
+              { src: "/images/wellness/wellness-studio-1.webp", alt: "Wellness studio" },
             ].map((img) => (
               <div
                 key={img.src}
