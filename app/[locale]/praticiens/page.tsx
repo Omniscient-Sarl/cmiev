@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
-import { practitioners } from "@/lib/practitioners";
+import { getVisiblePractitioners } from "@/lib/db/queries";
 import { Hero } from "@/components/sections/Hero";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { AnimatedSection } from "@/components/sections/AnimatedSection";
@@ -47,6 +47,8 @@ export default async function PractitionersPage({
   if (!isValidLocale(locale)) notFound();
   const dict = await getDictionary(locale as Locale);
 
+  const allPractitioners = await getVisiblePractitioners();
+
   return (
     <>
       <Hero title={dict.practitioners.title} subtitle={dict.practitioners.subtitle} />
@@ -60,7 +62,7 @@ export default async function PractitionersPage({
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {practitioners.map((p) => (
+          {allPractitioners.map((p) => (
             <AnimatedSection key={p.slug}>
               <PractitionerCard
                 name={p.name}

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
-import { practitioners } from "@/lib/practitioners";
+import { getVisiblePractitioners } from "@/lib/db/queries";
 import { Hero } from "@/components/sections/Hero";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { AnimatedSection } from "@/components/sections/AnimatedSection";
@@ -87,7 +87,8 @@ export default async function HomePage({
   if (!isValidLocale(locale)) notFound();
   const dict = await getDictionary(locale as Locale);
 
-  const featuredPractitioners = practitioners.filter((p) => p.image).slice(0, 3);
+  const allPractitioners = await getVisiblePractitioners();
+  const featuredPractitioners = allPractitioners.filter((p) => p.image).slice(0, 3);
 
   return (
     <>

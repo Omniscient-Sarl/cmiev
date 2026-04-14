@@ -12,3 +12,14 @@ export const contactFormSchema = z.object({
 });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;
+
+export const practitionerContactSchema = z.object({
+  name: z.string().min(2),
+  email: z.string().email(),
+  phone: z.string().optional(),
+  message: z.string().min(10),
+  practitionerSlug: z.string(),
+  honeypot: z.string().max(0, "Bot detected"),
+});
+
+export type PractitionerContactData = z.infer<typeof practitionerContactSchema>;

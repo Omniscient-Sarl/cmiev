@@ -1,11 +1,12 @@
 import type { MetadataRoute } from "next";
 import { locales } from "@/lib/i18n";
-import { practitioners } from "@/lib/practitioners";
+import { getAllPractitioners } from "@/lib/db/queries";
 
 const BASE_URL = "https://cmiev.ch";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const practitioners = await getAllPractitioners();
 
   const staticPages = ["", "/praticiens", "/pilates", "/cours-collectifs", "/galerie", "/contact"];
 

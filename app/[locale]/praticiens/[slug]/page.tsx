@@ -4,15 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { isValidLocale, locales, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
-import { practitioners, getPractitionerBySlug } from "@/lib/practitioners";
+import { getAllPractitioners, getPractitionerBySlugCached } from "@/lib/db/queries";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { AnimatedSection } from "@/components/sections/AnimatedSection";
-import { ContactCta } from "@/components/sections/ContactCta";
+import { PractitionerContactForm } from "@/components/sections/PractitionerContactForm";
 import { physicianJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 
 export async function generateStaticParams() {
+  const allPractitioners = await getAllPractitioners();
   return locales.flatMap((locale) =>
-    practitioners.map((p) => ({ locale, slug: p.slug }))
+    allPractitioners.map((p) => ({ locale, slug: p.slug }))
   );
 }
 
@@ -23,7 +24,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
   if (!isValidLocale(locale)) return {};
-  const practitioner = getPractitionerBySlug(slug);
+  const practitioner = await getPractitionerBySlugCached(slug);
   if (!practitioner) return {};
   const title = `${practitioner.name} — ${practitioner.title[locale as Locale]}, Genève`;
   const description = `${practitioner.name}, ${practitioner.title[locale as Locale]} au CMIEV, Eaux-Vives, Genève. ${practitioner.specialties[locale as Locale].join(", ")}.`;
@@ -60,7 +61,7 @@ export default async function PractitionerPage({
 }) {
   const { locale, slug } = await params;
   if (!isValidLocale(locale)) notFound();
-  const practitioner = getPractitionerBySlug(slug);
+  const practitioner = await getPractitionerBySlugCached(slug);
   if (!practitioner) notFound();
   const dict = await getDictionary(locale as Locale);
   const loc = locale as Locale;
@@ -237,12 +238,46 @@ export default async function PractitionerPage({
         </div>
       </SectionWrapper>
 
-      <ContactCta
-        title={dict.practitioners.bookAppointment}
-        description={`${dict.practitioners.bookAppointment} — ${practitioner.name}`}
-        buttonText={dict.practitioners.bookAppointment}
-        href={`/${locale}/contact`}
-      />
+      {/* Per-practitioner contact form */}
+      {practitioner.email && (
+        <SectionWrapper variant="cream">
+          <AnimatedSection>
+            <div className="mx-auto max-w-2xl">
+              <div className="text-center">
+                <span className="mx-auto mb-4 block h-1 w-16 rounded-full bg-accent" />
+                <h2 className="font-heading text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+                  {dict.practitioners.bookAppointment}
+                </h2>
+                <p className="mt-3 text-muted-foreground">
+                  {dict.practitioners.bookAppointment} — {practitioner.name}
+                </p>
+              </div>
+              <div className="mt-10">
+                <PractitionerContactForm
+                  practitionerSlug={practitioner.slug}
+                  practitionerName={practitioner.name}
+                  dict={{
+                    nameLabel: dict.contact.nameLabel,
+                    namePlaceholder: dict.contact.namePlaceholder,
+                    emailLabel: dict.contact.emailLabel,
+                    emailPlaceholder: dict.contact.emailPlaceholder,
+                    phoneLabel: dict.contact.phoneLabel,
+                    phonePlaceholder: dict.contact.phonePlaceholder,
+                    messageLabel: dict.contact.messageLabel,
+                    messagePlaceholder: dict.contact.messagePlaceholder,
+                    submit: dict.contact.submit,
+                    sending: dict.contact.sending,
+                    successTitle: dict.contact.successTitle,
+                    successMessage: dict.contact.successMessage,
+                    errorTitle: dict.contact.errorTitle,
+                    errorMessage: dict.contact.errorMessage,
+                  }}
+                />
+              </div>
+            </div>
+          </AnimatedSection>
+        </SectionWrapper>
+      )}
     </>
   );
 }
