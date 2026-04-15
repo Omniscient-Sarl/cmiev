@@ -114,7 +114,7 @@ export default function EditPractitionerPage({
 
   return (
     <div>
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 space-y-3">
         <div className="flex items-center gap-4">
           <Link
             href="/admin/practitioners"
@@ -122,19 +122,19 @@ export default function EditPractitionerPage({
           >
             &larr; Retour
           </Link>
-          <h1 className="text-2xl font-bold">Modifier le praticien</h1>
+          <h1 className="text-xl font-bold md:text-2xl">Modifier le praticien</h1>
         </div>
         <button
           type="button"
           onClick={handleDelete}
           disabled={isPending}
-          className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 transition-colors disabled:opacity-50"
+          className="w-full rounded-md bg-red-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-red-700 transition-colors disabled:opacity-50 min-h-[44px] sm:w-auto"
         >
           Supprimer
         </button>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-8 rounded-lg border border-gray-200 bg-white p-6">
+      <form onSubmit={handleSubmit} className="space-y-6 rounded-lg border border-gray-200 bg-white p-4 md:space-y-8 md:p-6">
         {/* Photo */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">Photo</label>
@@ -229,7 +229,7 @@ export default function EditPractitionerPage({
             <textarea
               id="bioFr"
               name="bioFr"
-              rows={5}
+              rows={3}
               defaultValue={practitioner.bioFr ?? ""}
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
@@ -241,7 +241,7 @@ export default function EditPractitionerPage({
             <textarea
               id="bioEn"
               name="bioEn"
-              rows={5}
+              rows={3}
               defaultValue={practitioner.bioEn ?? ""}
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
@@ -409,7 +409,7 @@ export default function EditPractitionerPage({
           <button
             type="submit"
             disabled={isPending || isUploading}
-            className="rounded-md bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors disabled:opacity-50"
+            className="w-full rounded-md bg-blue-600 px-6 py-2.5 text-sm font-medium text-white hover:bg-blue-700 transition-colors disabled:opacity-50 min-h-[44px] sm:w-auto"
           >
             {isPending ? "Enregistrement..." : "Enregistrer"}
           </button>

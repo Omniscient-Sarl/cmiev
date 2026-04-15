@@ -25,7 +25,7 @@ export default async function AdminDashboard() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Tableau de bord</h1>
+        <h1 className="text-2xl font-bold tracking-tight md:text-3xl">Tableau de bord</h1>
         <p className="mt-2 text-muted-foreground">
           Bienvenue sur le tableau de bord administrateur du CMIEV.
         </p>
@@ -33,8 +33,8 @@ export default async function AdminDashboard() {
 
       {/* Practitioners section */}
       <section>
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-gray-900">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="text-lg font-semibold text-gray-900 sm:text-xl">
             Praticiens
           </h2>
           <Link
@@ -96,7 +96,7 @@ export default async function AdminDashboard() {
                 {/* Edit button */}
                 <Link
                   href={`/admin/practitioners/${p.id}`}
-                  className="shrink-0 rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-50"
+                  className="shrink-0 rounded-lg border border-gray-200 px-3 py-2 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-50 min-h-[44px] flex items-center md:min-h-0 md:py-1.5"
                 >
                   Modifier
                 </Link>
@@ -108,8 +108,8 @@ export default async function AdminDashboard() {
 
       {/* Access Requests section */}
       <section>
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-gray-900">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="text-lg font-semibold text-gray-900 sm:text-xl">
             Demandes d&apos;accès
           </h2>
           <Link
@@ -165,13 +165,13 @@ export default async function AdminDashboard() {
 
       {/* Content blocks section */}
       <section>
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold text-gray-900">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <h2 className="text-lg font-semibold text-gray-900 sm:text-xl">
             Blocs de contenu
           </h2>
           <Link
             href="/admin/pages/accueil"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90"
+            className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-primary/90 min-h-[44px] w-full sm:w-auto"
           >
             Modifier les pages →
           </Link>

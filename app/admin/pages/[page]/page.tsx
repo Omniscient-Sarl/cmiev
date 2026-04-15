@@ -187,7 +187,7 @@ export default function PageEditorPage({
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">{pageLabel}</h1>
+      <h1 className="text-2xl font-bold mb-4 md:mb-6 md:text-3xl">{pageLabel}</h1>
 
       {/* Content blocks */}
       {blocks.length > 0 && (
@@ -203,12 +203,12 @@ export default function PageEditorPage({
                   key={block.key}
                   className="bg-white border border-gray-200 rounded-lg p-4"
                 >
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="text-sm font-medium text-gray-600">
+                  <div className="flex flex-col gap-1 mb-2 sm:flex-row sm:items-center sm:justify-between">
+                    <label className="text-sm font-medium text-gray-600 break-all">
                       {block.key}
                     </label>
-                    <span className="text-xs text-gray-400">
-                      Modifié :{" "}
+                    <span className="text-xs text-gray-400 shrink-0">
+                      Modifie :{" "}
                       {new Date(block.updatedAt).toLocaleString("fr-CH", {
                         day: "numeric",
                         month: "short",
@@ -240,7 +240,7 @@ export default function PageEditorPage({
                         savingKey === block.key ||
                         editedValues[block.key] === block.value
                       }
-                      className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
                     >
                       {savingKey === block.key
                         ? "Enregistrement..."
@@ -265,7 +265,7 @@ export default function PageEditorPage({
           <h2 className="text-lg font-semibold mb-3 text-gray-700">
             Images
           </h2>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {imageSlots.map((slot) => {
               const fullKey = `${prefix}.${slot.keySuffix}`;
               const currentUrl = imageUrls[fullKey];
