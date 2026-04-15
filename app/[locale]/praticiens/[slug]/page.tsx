@@ -235,14 +235,17 @@ export default async function PractitionerPage({
                     {dict.practitioners.languagesSpoken}
                   </h2>
                   <div className="mt-5 flex flex-wrap gap-2">
-                    {practitioner.spokenLanguages.map((code) => (
-                      <span
-                        key={code}
-                        className="inline-block rounded-full bg-accent/20 px-4 py-2 text-sm font-medium text-accent-foreground"
-                      >
-                        {dict.practitioners.languages[code as keyof typeof dict.practitioners.languages] ?? code}
-                      </span>
-                    ))}
+                    {practitioner.spokenLanguages.map((code) => {
+                      const langMap = dict.practitioners.languages as Record<string, string>;
+                      return (
+                        <span
+                          key={code}
+                          className="inline-block rounded-full border border-[#5A7A6F]/40 bg-[#5A7A6F] px-4 py-2 text-sm font-medium text-white"
+                        >
+                          {langMap[code] ?? code}
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
               </AnimatedSection>
