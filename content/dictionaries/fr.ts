@@ -106,6 +106,18 @@ const fr = {
     breadcrumbHome: "Accueil",
     breadcrumbPractitioners: "Praticiens",
     languagesSpoken: "Langues parlées",
+    languages: {
+      fr: "Français",
+      en: "Anglais",
+      de: "Allemand",
+      it: "Italien",
+      es: "Espagnol",
+      pt: "Portugais",
+      ar: "Arabe",
+      ru: "Russe",
+      zh: "Chinois",
+      ja: "Japonais",
+    },
   },
   pilates: {
     title: "Pilates au CMIEV",

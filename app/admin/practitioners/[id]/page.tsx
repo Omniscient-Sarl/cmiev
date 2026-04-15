@@ -10,6 +10,19 @@ import {
 } from "../actions";
 import { useUploadThing } from "@/lib/uploadthing";
 
+const LANGUAGE_OPTIONS = [
+  { code: "fr", label: "Français" },
+  { code: "en", label: "Anglais" },
+  { code: "de", label: "Allemand" },
+  { code: "it", label: "Italien" },
+  { code: "es", label: "Espagnol" },
+  { code: "pt", label: "Portugais" },
+  { code: "ar", label: "Arabe" },
+  { code: "ru", label: "Russe" },
+  { code: "zh", label: "Chinois" },
+  { code: "ja", label: "Japonais" },
+];
+
 type Practitioner = Awaited<ReturnType<typeof getPractitioner>>;
 
 export default function EditPractitionerPage({
@@ -301,18 +314,23 @@ export default function EditPractitionerPage({
 
         {/* Spoken Languages */}
         <div>
-          <label htmlFor="spokenLanguages" className="block text-sm font-medium text-gray-700 mb-1">
+          <p className="block text-sm font-medium text-gray-700 mb-2">
             Langues parlées
-          </label>
-          <input
-            id="spokenLanguages"
-            name="spokenLanguages"
-            type="text"
-            defaultValue={practitioner.spokenLanguages?.join(", ") ?? ""}
-            placeholder="Valeurs séparées par des virgules"
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          />
-          <p className="mt-1 text-xs text-gray-400">Séparez les valeurs par des virgules</p>
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {LANGUAGE_OPTIONS.map(({ code, label }) => (
+              <label key={code} className="flex items-center gap-2 text-sm text-gray-700">
+                <input
+                  type="checkbox"
+                  name="spokenLanguages"
+                  value={code}
+                  defaultChecked={practitioner.spokenLanguages?.includes(code) ?? false}
+                  className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                />
+                {label}
+              </label>
+            ))}
+          </div>
         </div>
 
         {/* Contact */}

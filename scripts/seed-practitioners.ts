@@ -30,7 +30,7 @@ async function main() {
       specialtiesEn: p.specialties.en,
       conditionsFr: p.conditions.fr,
       conditionsEn: p.conditions.en,
-      spokenLanguages: ["Français", "Anglais"],
+      spokenLanguages: ["fr", "en"],
       phone: p.phone,
       email: p.email ?? null,
       photoUrl: p.image ?? null,

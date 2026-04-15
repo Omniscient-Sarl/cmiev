@@ -235,12 +235,12 @@ export default async function PractitionerPage({
                     {dict.practitioners.languagesSpoken}
                   </h2>
                   <div className="mt-5 flex flex-wrap gap-2">
-                    {practitioner.spokenLanguages.map((lang) => (
+                    {practitioner.spokenLanguages.map((code) => (
                       <span
-                        key={lang}
+                        key={code}
                         className="inline-block rounded-full bg-accent/20 px-4 py-2 text-sm font-medium text-accent-foreground"
                       >
-                        {lang}
+                        {dict.practitioners.languages[code as keyof typeof dict.practitioners.languages] ?? code}
                       </span>
                     ))}
                   </div>
