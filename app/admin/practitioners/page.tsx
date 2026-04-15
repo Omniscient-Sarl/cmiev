@@ -13,12 +13,12 @@ export default async function PractitionersPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Practitioners</h1>
+        <h1 className="text-2xl font-bold">Praticiens</h1>
         <Link
           href="/admin/practitioners/new"
           className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors"
         >
-          + Add practitioner
+          + Ajouter un praticien
         </Link>
       </div>
 
@@ -30,16 +30,16 @@ export default async function PractitionersPage() {
                 Photo
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                Name (FR)
+                Nom (FR)
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                Title (FR)
+                Titre (FR)
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                Phone
+                Téléphone
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                Order
+                Ordre
               </th>
               <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
                 Visible
@@ -56,7 +56,7 @@ export default async function PractitionersPage() {
                   colSpan={7}
                   className="px-4 py-8 text-center text-sm text-gray-500"
                 >
-                  No practitioners yet. Add one to get started.
+                  Aucun praticien. Ajoutez-en un pour commencer.
                 </td>
               </tr>
             )}
@@ -93,7 +93,7 @@ export default async function PractitionersPage() {
                     href={`/admin/practitioners/${p.id}`}
                     className="inline-flex items-center rounded-md bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors"
                   >
-                    Edit
+                    Modifier
                   </Link>
                 </td>
               </tr>

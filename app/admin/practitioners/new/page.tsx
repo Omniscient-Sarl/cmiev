@@ -51,9 +51,9 @@ export default function NewPractitionerPage() {
           href="/admin/practitioners"
           className="text-sm text-gray-500 hover:text-gray-700"
         >
-          &larr; Back
+          &larr; Retour
         </Link>
-        <h1 className="text-2xl font-bold">New Practitioner</h1>
+        <h1 className="text-2xl font-bold">Nouveau praticien</h1>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8 rounded-lg border border-gray-200 bg-white p-6">
@@ -76,7 +76,7 @@ export default function NewPractitionerPage() {
                 className="text-sm text-gray-600"
               />
               {isUploading && (
-                <p className="mt-1 text-xs text-blue-600">Uploading...</p>
+                <p className="mt-1 text-xs text-blue-600">Téléchargement...</p>
               )}
             </div>
           </div>
@@ -86,7 +86,7 @@ export default function NewPractitionerPage() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <label htmlFor="nameFr" className="block text-sm font-medium text-gray-700 mb-1">
-              Name (FR)
+              Nom (FR)
             </label>
             <input
               id="nameFr"
@@ -98,7 +98,7 @@ export default function NewPractitionerPage() {
           </div>
           <div>
             <label htmlFor="nameEn" className="block text-sm font-medium text-gray-700 mb-1">
-              Name (EN)
+              Nom (EN)
             </label>
             <input
               id="nameEn"
@@ -114,7 +114,7 @@ export default function NewPractitionerPage() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <label htmlFor="titleFr" className="block text-sm font-medium text-gray-700 mb-1">
-              Title (FR)
+              Titre (FR)
             </label>
             <input
               id="titleFr"
@@ -126,7 +126,7 @@ export default function NewPractitionerPage() {
           </div>
           <div>
             <label htmlFor="titleEn" className="block text-sm font-medium text-gray-700 mb-1">
-              Title (EN)
+              Titre (EN)
             </label>
             <input
               id="titleEn"
@@ -168,29 +168,29 @@ export default function NewPractitionerPage() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <label htmlFor="specialtiesFr" className="block text-sm font-medium text-gray-700 mb-1">
-              Specialties (FR)
+              Spécialités (FR)
             </label>
             <input
               id="specialtiesFr"
               name="specialtiesFr"
               type="text"
-              placeholder="Comma-separated values"
+              placeholder="Valeurs séparées par des virgules"
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
-            <p className="mt-1 text-xs text-gray-400">Separate multiple values with commas</p>
+            <p className="mt-1 text-xs text-gray-400">Séparez les valeurs par des virgules</p>
           </div>
           <div>
             <label htmlFor="specialtiesEn" className="block text-sm font-medium text-gray-700 mb-1">
-              Specialties (EN)
+              Spécialités (EN)
             </label>
             <input
               id="specialtiesEn"
               name="specialtiesEn"
               type="text"
-              placeholder="Comma-separated values"
+              placeholder="Valeurs séparées par des virgules"
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
-            <p className="mt-1 text-xs text-gray-400">Separate multiple values with commas</p>
+            <p className="mt-1 text-xs text-gray-400">Séparez les valeurs par des virgules</p>
           </div>
         </div>
 
@@ -198,37 +198,53 @@ export default function NewPractitionerPage() {
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <label htmlFor="conditionsFr" className="block text-sm font-medium text-gray-700 mb-1">
-              Conditions (FR)
+              Pathologies (FR)
             </label>
             <input
               id="conditionsFr"
               name="conditionsFr"
               type="text"
-              placeholder="Comma-separated values"
+              placeholder="Valeurs séparées par des virgules"
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
-            <p className="mt-1 text-xs text-gray-400">Separate multiple values with commas</p>
+            <p className="mt-1 text-xs text-gray-400">Séparez les valeurs par des virgules</p>
           </div>
           <div>
             <label htmlFor="conditionsEn" className="block text-sm font-medium text-gray-700 mb-1">
-              Conditions (EN)
+              Pathologies (EN)
             </label>
             <input
               id="conditionsEn"
               name="conditionsEn"
               type="text"
-              placeholder="Comma-separated values"
+              placeholder="Valeurs séparées par des virgules"
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
-            <p className="mt-1 text-xs text-gray-400">Separate multiple values with commas</p>
+            <p className="mt-1 text-xs text-gray-400">Séparez les valeurs par des virgules</p>
           </div>
+        </div>
+
+        {/* Spoken Languages */}
+        <div>
+          <label htmlFor="spokenLanguages" className="block text-sm font-medium text-gray-700 mb-1">
+            Langues parlées
+          </label>
+          <input
+            id="spokenLanguages"
+            name="spokenLanguages"
+            type="text"
+            defaultValue="Français, Anglais"
+            placeholder="Valeurs séparées par des virgules"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+          <p className="mt-1 text-xs text-gray-400">Séparez les valeurs par des virgules</p>
         </div>
 
         {/* Contact */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-              Phone
+              Téléphone
             </label>
             <input
               id="phone"
@@ -266,7 +282,7 @@ export default function NewPractitionerPage() {
           </div>
           <div>
             <label htmlFor="order" className="block text-sm font-medium text-gray-700 mb-1">
-              Display Order
+              Ordre d&apos;affichage
             </label>
             <input
               id="order"
@@ -286,8 +302,8 @@ export default function NewPractitionerPage() {
               defaultValue="true"
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             >
-              <option value="true">Yes</option>
-              <option value="false">No</option>
+              <option value="true">Oui</option>
+              <option value="false">Non</option>
             </select>
           </div>
         </div>
@@ -299,7 +315,7 @@ export default function NewPractitionerPage() {
             disabled={isPending || isUploading}
             className="rounded-md bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors disabled:opacity-50"
           >
-            {isPending ? "Creating..." : "Create Practitioner"}
+            {isPending ? "Création..." : "Créer le praticien"}
           </button>
         </div>
       </form>

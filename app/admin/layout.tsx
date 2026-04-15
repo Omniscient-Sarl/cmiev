@@ -22,8 +22,8 @@ export default async function AdminLayout({ children }: { children: React.ReactN
       <html lang="en">
         <body className="min-h-screen flex items-center justify-center bg-background font-sans antialiased">
           <div className="max-w-md text-center p-8">
-            <h1 className="font-heading text-2xl font-bold mb-4">Access Pending</h1>
-            <p className="text-muted-foreground">Your access request is pending approval. You will receive an email when your account has been reviewed.</p>
+            <h1 className="font-heading text-2xl font-bold mb-4">Accès en attente</h1>
+            <p className="text-muted-foreground">Votre demande d&apos;accès est en cours d&apos;examen. Vous recevrez un e-mail lorsque votre compte aura été vérifié.</p>
             <SignOutButton />
           </div>
         </body>
@@ -37,12 +37,12 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <body className="min-h-screen flex items-center justify-center bg-background font-sans antialiased">
           <div className="max-w-md text-center p-8">
             <h1 className="font-heading text-2xl font-bold mb-4">
-              {user.status === "pending" ? "Access Pending" : "Access Denied"}
+              {user.status === "pending" ? "Accès en attente" : "Accès refusé"}
             </h1>
             <p className="text-muted-foreground">
               {user.status === "pending"
-                ? "Your access request is pending approval. You will receive an email when your account has been reviewed."
-                : "Your access request has been denied. Please contact the administrator."}
+                ? "Votre demande d&apos;accès est en cours d&apos;examen. Vous recevrez un e-mail lorsque votre compte aura été vérifié."
+                : "Votre demande d&apos;accès a été refusée. Veuillez contacter l&apos;administrateur."}
             </p>
             <SignOutButton />
           </div>

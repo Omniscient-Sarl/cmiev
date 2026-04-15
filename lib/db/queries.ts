@@ -29,6 +29,7 @@ function dbRowToPractitioner(row: typeof practitionersTable.$inferSelect): Pract
     conditions: { fr: row.conditionsFr, en: row.conditionsEn },
     image: row.photoUrl ?? undefined,
     seoKeywords: { fr: [], en: [] },
+    spokenLanguages: row.spokenLanguages,
   };
 }
 

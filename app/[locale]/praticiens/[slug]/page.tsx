@@ -227,6 +227,27 @@ export default async function PractitionerPage({
               </div>
             </AnimatedSection>
 
+            {/* Spoken Languages */}
+            {practitioner.spokenLanguages && practitioner.spokenLanguages.length > 0 && (
+              <AnimatedSection>
+                <div className="rounded-2xl bg-[#f5f0e8] p-8">
+                  <h2 className="font-heading text-xl font-bold text-foreground">
+                    {dict.practitioners.languagesSpoken}
+                  </h2>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {practitioner.spokenLanguages.map((lang) => (
+                      <span
+                        key={lang}
+                        className="inline-block rounded-full bg-accent/20 px-4 py-2 text-sm font-medium text-accent-foreground"
+                      >
+                        {lang}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </AnimatedSection>
+            )}
+
             {/* Conditions */}
             <AnimatedSection>
               <div className="rounded-2xl bg-[#f5f0e8] p-8">

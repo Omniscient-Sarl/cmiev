@@ -56,6 +56,10 @@ export const practitioners = pgTable("practitioners", {
     .array()
     .default([])
     .notNull(),
+  spokenLanguages: text("spoken_languages")
+    .array()
+    .default([])
+    .notNull(),
   phone: text("phone"),
   email: text("email"),
   photoUrl: text("photo_url"),

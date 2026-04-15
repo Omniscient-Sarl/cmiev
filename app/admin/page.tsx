@@ -25,9 +25,9 @@ export default async function AdminDashboard() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+        <h1 className="text-3xl font-bold tracking-tight">Tableau de bord</h1>
         <p className="mt-2 text-muted-foreground">
-          Welcome to the CMIEV admin dashboard.
+          Bienvenue sur le tableau de bord administrateur du CMIEV.
         </p>
       </div>
 
@@ -35,25 +35,25 @@ export default async function AdminDashboard() {
       <section>
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold text-gray-900">
-            Practitioners
+            Praticiens
           </h2>
           <Link
             href="/admin/practitioners"
             className="text-sm font-medium text-primary hover:underline"
           >
-            View all →
+            Voir tout →
           </Link>
         </div>
 
         <div className="mt-4 divide-y divide-gray-100 rounded-xl border border-gray-200 bg-white shadow-sm">
           {topPractitioners.length === 0 ? (
             <div className="p-8 text-center text-gray-500">
-              <p>No practitioners yet.</p>
+              <p>Aucun praticien pour le moment.</p>
               <Link
                 href="/admin/practitioners/new"
                 className="mt-2 inline-block text-sm font-medium text-primary hover:underline"
               >
-                Add your first practitioner →
+                Ajouter votre premier praticien →
               </Link>
             </div>
           ) : (
@@ -98,7 +98,7 @@ export default async function AdminDashboard() {
                   href={`/admin/practitioners/${p.id}`}
                   className="shrink-0 rounded-lg border border-gray-200 px-3 py-1.5 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-50"
                 >
-                  Edit
+                  Modifier
                 </Link>
               </div>
             ))
@@ -110,13 +110,13 @@ export default async function AdminDashboard() {
       <section>
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold text-gray-900">
-            Access Requests
+            Demandes d&apos;accès
           </h2>
           <Link
             href="/admin/access-requests"
             className="text-sm font-medium text-primary hover:underline"
           >
-            View all →
+            Voir tout →
           </Link>
         </div>
 
@@ -137,7 +137,7 @@ export default async function AdminDashboard() {
                 />
               </svg>
               <span className="text-sm">
-                No pending access requests — all caught up!
+                Aucune demande d&apos;accès en attente — tout est à jour !
               </span>
             </div>
           ) : (
@@ -167,13 +167,13 @@ export default async function AdminDashboard() {
       <section>
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold text-gray-900">
-            Content Blocks
+            Blocs de contenu
           </h2>
           <Link
             href="/admin/content"
             className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90"
           >
-            Go to editor →
+            Aller à l&apos;éditeur →
           </Link>
         </div>
 
@@ -196,10 +196,10 @@ export default async function AdminDashboard() {
             </span>
             <div>
               <p className="font-medium text-gray-900">
-                {contentCount.count} content blocks
+                {contentCount.count} blocs de contenu
               </p>
               <p className="text-sm text-gray-500">
-                Editable text across all site pages
+                Texte modifiable sur toutes les pages du site
               </p>
             </div>
           </div>

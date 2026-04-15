@@ -105,6 +105,7 @@ const fr = {
     biography: "Biographie",
     breadcrumbHome: "Accueil",
     breadcrumbPractitioners: "Praticiens",
+    languagesSpoken: "Langues parlées",
   },
   pilates: {
     title: "Pilates au CMIEV",

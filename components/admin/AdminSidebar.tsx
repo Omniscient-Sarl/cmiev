@@ -5,13 +5,13 @@ import { usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
 
 const navItems = [
-  { href: "/admin", label: "Dashboard", icon: "LayoutDashboard" },
-  { href: "/admin/practitioners", label: "Practitioners", icon: "Users" },
-  { href: "/admin/content", label: "Content", icon: "FileText" },
+  { href: "/admin", label: "Tableau de bord", icon: "LayoutDashboard" },
+  { href: "/admin/practitioners", label: "Praticiens", icon: "Users" },
+  { href: "/admin/content", label: "Contenu", icon: "FileText" },
 ];
 
 const adminItems = [
-  { href: "/admin/access-requests", label: "Access Requests", icon: "ShieldCheck" },
+  { href: "/admin/access-requests", label: "Demandes d'accès", icon: "ShieldCheck" },
 ];
 
 // SVG icon components inline

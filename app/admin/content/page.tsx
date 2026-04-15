@@ -22,10 +22,6 @@ export default function ContentEditorPage() {
   const [isPending, startTransition] = useTransition();
   const [seedMessage, setSeedMessage] = useState<string | null>(null);
 
-  useEffect(() => {
-    loadBlocks();
-  }, []);
-
   async function loadBlocks() {
     const data = await getContentBlocks();
     setBlocks(data);
@@ -35,6 +31,9 @@ export default function ContentEditorPage() {
     }
     setEditedValues(values);
   }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { loadBlocks(); }, []);
 
   // Group blocks by page (first segment of key)
   const grouped = blocks.reduce<Record<string, ContentBlock[]>>(
@@ -69,14 +68,14 @@ export default function ContentEditorPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Content Editor</h1>
+        <h1 className="text-2xl font-bold">Éditeur de contenu</h1>
         {blocks.length === 0 && (
           <button
             onClick={handleSeed}
             disabled={isPending}
             className="px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors disabled:opacity-50"
           >
-            Seed Default Content
+            Initialiser le contenu par défaut
           </button>
         )}
       </div>
@@ -89,8 +88,8 @@ export default function ContentEditorPage() {
 
       {blocks.length === 0 && !seedMessage && (
         <p className="text-gray-500">
-          No content blocks found. Click &quot;Seed Default Content&quot; to
-          create initial entries.
+          Aucun bloc de contenu trouvé. Cliquez sur &quot;Initialiser le contenu par défaut&quot; pour
+          créer les entrées initiales.
         </p>
       )}
 
@@ -114,8 +113,8 @@ export default function ContentEditorPage() {
                         {block.key}
                       </label>
                       <span className="text-xs text-gray-400">
-                        Updated:{" "}
-                        {new Date(block.updatedAt).toLocaleString("en-GB", {
+                        Modifié :{" "}
+                        {new Date(block.updatedAt).toLocaleString("fr-CH", {
                           day: "numeric",
                           month: "short",
                           year: "numeric",
@@ -137,7 +136,7 @@ export default function ContentEditorPage() {
                     <div className="flex items-center justify-end mt-2 gap-2">
                       {editedValues[block.key] !== block.value && (
                         <span className="text-xs text-amber-600">
-                          Unsaved changes
+                          Modifications non enregistrées
                         </span>
                       )}
                       <button
@@ -148,7 +147,7 @@ export default function ContentEditorPage() {
                         }
                         className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        {savingKey === block.key ? "Saving..." : "Save"}
+                        {savingKey === block.key ? "Enregistrement..." : "Enregistrer"}
                       </button>
                     </div>
                   </div>

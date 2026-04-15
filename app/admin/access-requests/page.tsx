@@ -5,17 +5,17 @@ export default async function AccessRequestsPage() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">Access Requests</h1>
+      <h1 className="text-2xl font-bold mb-6">Demandes d&apos;accès</h1>
 
       {requests.length === 0 ? (
-        <p className="text-gray-500">No access requests yet.</p>
+        <p className="text-gray-500">Aucune demande d&apos;accès pour le moment.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full bg-white border border-gray-200 rounded-lg">
             <thead>
               <tr className="bg-gray-50 border-b border-gray-200">
                 <th className="text-left px-4 py-3 text-sm font-semibold text-gray-600">
-                  Name
+                  Nom
                 </th>
                 <th className="text-left px-4 py-3 text-sm font-semibold text-gray-600">
                   Email
@@ -24,7 +24,7 @@ export default async function AccessRequestsPage() {
                   Date
                 </th>
                 <th className="text-left px-4 py-3 text-sm font-semibold text-gray-600">
-                  Status
+                  Statut
                 </th>
                 <th className="text-left px-4 py-3 text-sm font-semibold text-gray-600">
                   Actions
@@ -37,7 +37,7 @@ export default async function AccessRequestsPage() {
                   <td className="px-4 py-3 text-sm">{req.name || "—"}</td>
                   <td className="px-4 py-3 text-sm">{req.email}</td>
                   <td className="px-4 py-3 text-sm text-gray-500">
-                    {req.createdAt.toLocaleDateString("en-GB", {
+                    {req.createdAt.toLocaleDateString("fr-CH", {
                       day: "numeric",
                       month: "short",
                       year: "numeric",
@@ -59,7 +59,7 @@ export default async function AccessRequestsPage() {
                             type="submit"
                             className="px-3 py-1 text-sm bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
                           >
-                            Approve
+                            Approuver
                           </button>
                         </form>
                         <form
@@ -72,7 +72,7 @@ export default async function AccessRequestsPage() {
                             type="submit"
                             className="px-3 py-1 text-sm bg-red-600 text-white rounded hover:bg-red-700 transition-colors"
                           >
-                            Reject
+                            Rejeter
                           </button>
                         </form>
                       </div>
@@ -95,11 +95,17 @@ function StatusBadge({ status }: { status: string }) {
     rejected: "bg-red-100 text-red-800",
   };
 
+  const labels: Record<string, string> = {
+    pending: "En attente",
+    approved: "Approuvé",
+    rejected: "Refusé",
+  };
+
   return (
     <span
       className={`inline-block px-2 py-0.5 rounded-full text-xs font-medium ${styles[status] ?? "bg-gray-100 text-gray-800"}`}
     >
-      {status}
+      {labels[status] ?? status}
     </span>
   );
 }

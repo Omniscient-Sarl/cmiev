@@ -71,7 +71,7 @@ export default function EditPractitionerPage({
   }
 
   async function handleDelete() {
-    if (!confirm("Are you sure you want to delete this practitioner? This action cannot be undone.")) {
+    if (!confirm("Êtes-vous sûr de vouloir supprimer ce praticien ? Cette action est irréversible.")) {
       return;
     }
     startTransition(async () => {
@@ -83,7 +83,7 @@ export default function EditPractitionerPage({
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <p className="text-gray-500">Loading...</p>
+        <p className="text-gray-500">Chargement...</p>
       </div>
     );
   }
@@ -91,9 +91,9 @@ export default function EditPractitionerPage({
   if (!practitioner) {
     return (
       <div className="flex flex-col items-center justify-center py-20 gap-4">
-        <p className="text-gray-500">Practitioner not found.</p>
+        <p className="text-gray-500">Praticien introuvable.</p>
         <Link href="/admin/practitioners" className="text-blue-600 hover:underline">
-          Back to list
+          Retour à la liste
         </Link>
       </div>
     );
@@ -107,9 +107,9 @@ export default function EditPractitionerPage({
             href="/admin/practitioners"
             className="text-sm text-gray-500 hover:text-gray-700"
           >
-            &larr; Back
+            &larr; Retour
           </Link>
-          <h1 className="text-2xl font-bold">Edit Practitioner</h1>
+          <h1 className="text-2xl font-bold">Modifier le praticien</h1>
         </div>
         <button
           type="button"
@@ -117,7 +117,7 @@ export default function EditPractitionerPage({
           disabled={isPending}
           className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 transition-colors disabled:opacity-50"
         >
-          Delete
+          Supprimer
         </button>
       </div>
 
@@ -141,7 +141,7 @@ export default function EditPractitionerPage({
                 className="text-sm text-gray-600"
               />
               {isUploading && (
-                <p className="mt-1 text-xs text-blue-600">Uploading...</p>
+                <p className="mt-1 text-xs text-blue-600">Téléchargement...</p>
               )}
             </div>
           </div>
@@ -151,7 +151,7 @@ export default function EditPractitionerPage({
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <label htmlFor="nameFr" className="block text-sm font-medium text-gray-700 mb-1">
-              Name (FR)
+              Nom (FR)
             </label>
             <input
               id="nameFr"
@@ -164,7 +164,7 @@ export default function EditPractitionerPage({
           </div>
           <div>
             <label htmlFor="nameEn" className="block text-sm font-medium text-gray-700 mb-1">
-              Name (EN)
+              Nom (EN)
             </label>
             <input
               id="nameEn"
@@ -181,7 +181,7 @@ export default function EditPractitionerPage({
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <label htmlFor="titleFr" className="block text-sm font-medium text-gray-700 mb-1">
-              Title (FR)
+              Titre (FR)
             </label>
             <input
               id="titleFr"
@@ -194,7 +194,7 @@ export default function EditPractitionerPage({
           </div>
           <div>
             <label htmlFor="titleEn" className="block text-sm font-medium text-gray-700 mb-1">
-              Title (EN)
+              Titre (EN)
             </label>
             <input
               id="titleEn"
@@ -239,31 +239,31 @@ export default function EditPractitionerPage({
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <label htmlFor="specialtiesFr" className="block text-sm font-medium text-gray-700 mb-1">
-              Specialties (FR)
+              Spécialités (FR)
             </label>
             <input
               id="specialtiesFr"
               name="specialtiesFr"
               type="text"
               defaultValue={practitioner.specialtiesFr.join(", ")}
-              placeholder="Comma-separated values"
+              placeholder="Valeurs séparées par des virgules"
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
-            <p className="mt-1 text-xs text-gray-400">Separate multiple values with commas</p>
+            <p className="mt-1 text-xs text-gray-400">Séparez les valeurs par des virgules</p>
           </div>
           <div>
             <label htmlFor="specialtiesEn" className="block text-sm font-medium text-gray-700 mb-1">
-              Specialties (EN)
+              Spécialités (EN)
             </label>
             <input
               id="specialtiesEn"
               name="specialtiesEn"
               type="text"
               defaultValue={practitioner.specialtiesEn.join(", ")}
-              placeholder="Comma-separated values"
+              placeholder="Valeurs séparées par des virgules"
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
-            <p className="mt-1 text-xs text-gray-400">Separate multiple values with commas</p>
+            <p className="mt-1 text-xs text-gray-400">Séparez les valeurs par des virgules</p>
           </div>
         </div>
 
@@ -271,39 +271,55 @@ export default function EditPractitionerPage({
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <label htmlFor="conditionsFr" className="block text-sm font-medium text-gray-700 mb-1">
-              Conditions (FR)
+              Pathologies (FR)
             </label>
             <input
               id="conditionsFr"
               name="conditionsFr"
               type="text"
               defaultValue={practitioner.conditionsFr.join(", ")}
-              placeholder="Comma-separated values"
+              placeholder="Valeurs séparées par des virgules"
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
-            <p className="mt-1 text-xs text-gray-400">Separate multiple values with commas</p>
+            <p className="mt-1 text-xs text-gray-400">Séparez les valeurs par des virgules</p>
           </div>
           <div>
             <label htmlFor="conditionsEn" className="block text-sm font-medium text-gray-700 mb-1">
-              Conditions (EN)
+              Pathologies (EN)
             </label>
             <input
               id="conditionsEn"
               name="conditionsEn"
               type="text"
               defaultValue={practitioner.conditionsEn.join(", ")}
-              placeholder="Comma-separated values"
+              placeholder="Valeurs séparées par des virgules"
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
-            <p className="mt-1 text-xs text-gray-400">Separate multiple values with commas</p>
+            <p className="mt-1 text-xs text-gray-400">Séparez les valeurs par des virgules</p>
           </div>
+        </div>
+
+        {/* Spoken Languages */}
+        <div>
+          <label htmlFor="spokenLanguages" className="block text-sm font-medium text-gray-700 mb-1">
+            Langues parlées
+          </label>
+          <input
+            id="spokenLanguages"
+            name="spokenLanguages"
+            type="text"
+            defaultValue={practitioner.spokenLanguages?.join(", ") ?? ""}
+            placeholder="Valeurs séparées par des virgules"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          />
+          <p className="mt-1 text-xs text-gray-400">Séparez les valeurs par des virgules</p>
         </div>
 
         {/* Contact */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
             <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-              Phone
+              Téléphone
             </label>
             <input
               id="phone"
@@ -344,7 +360,7 @@ export default function EditPractitionerPage({
           </div>
           <div>
             <label htmlFor="order" className="block text-sm font-medium text-gray-700 mb-1">
-              Display Order
+              Ordre d&apos;affichage
             </label>
             <input
               id="order"
@@ -364,8 +380,8 @@ export default function EditPractitionerPage({
               defaultValue={practitioner.visible ? "true" : "false"}
               className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             >
-              <option value="true">Yes</option>
-              <option value="false">No</option>
+              <option value="true">Oui</option>
+              <option value="false">Non</option>
             </select>
           </div>
         </div>
@@ -377,7 +393,7 @@ export default function EditPractitionerPage({
             disabled={isPending || isUploading}
             className="rounded-md bg-blue-600 px-6 py-2 text-sm font-medium text-white hover:bg-blue-700 transition-colors disabled:opacity-50"
           >
-            {isPending ? "Saving..." : "Save Changes"}
+            {isPending ? "Enregistrement..." : "Enregistrer"}
           </button>
         </div>
       </form>

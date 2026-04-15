@@ -9,6 +9,7 @@ export interface Practitioner {
   conditions: { fr: string[]; en: string[] };
   image?: string;
   seoKeywords: { fr: string[]; en: string[] };
+  spokenLanguages?: string[];
 }
 
 export const practitioners: Practitioner[] = [

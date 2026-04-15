@@ -131,9 +131,51 @@ export function Footer({ locale, dict }: FooterProps) {
             </ul>
           </div>
 
-          {/* Column 4: Map */}
+          {/* Column 4: Hours & Map */}
           <div className="space-y-4">
+            {/* Opening hours */}
             <h4 className="font-heading text-lg font-semibold text-white">
+              {dict.footer.hoursTitle}
+            </h4>
+            <ul className="space-y-2 text-sm">
+              <li className="flex items-start gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mt-0.5 h-4 w-4 shrink-0 text-white/50"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>{dict.footer.hours}</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mt-0.5 h-4 w-4 shrink-0 text-white/50"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>{dict.footer.hoursSat}</span>
+              </li>
+            </ul>
+
+            {/* Map */}
+            <h4 className="font-heading text-lg font-semibold text-white pt-2">
               {locale === "fr" ? "Nous trouver" : "Find us"}
             </h4>
             <a

@@ -105,6 +105,7 @@ const en = {
     biography: "Biography",
     breadcrumbHome: "Home",
     breadcrumbPractitioners: "Practitioners",
+    languagesSpoken: "Languages spoken",
   },
   pilates: {
     title: "Pilates at CMIEV",
