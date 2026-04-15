@@ -7,7 +7,14 @@ import { UserButton } from "@clerk/nextjs";
 const navItems = [
   { href: "/admin", label: "Tableau de bord", icon: "LayoutDashboard" },
   { href: "/admin/practitioners", label: "Praticiens", icon: "Users" },
-  { href: "/admin/content", label: "Contenu", icon: "FileText" },
+];
+
+const pageItems = [
+  { href: "/admin/pages/accueil", label: "Accueil" },
+  { href: "/admin/pages/pilates", label: "Pilates" },
+  { href: "/admin/pages/cours-collectifs", label: "Cours collectifs" },
+  { href: "/admin/pages/galerie", label: "Galerie" },
+  { href: "/admin/pages/contact", label: "Contact" },
 ];
 
 const adminItems = [
@@ -33,7 +40,7 @@ function Icon({ name }: { name: string }) {
 export function AdminSidebar({ isAdmin }: { isAdmin: boolean }) {
   const pathname = usePathname();
 
-  const items = isAdmin ? [...navItems, ...adminItems] : navItems;
+  const topItems = isAdmin ? [...navItems, ...adminItems] : navItems;
 
   return (
     <aside className="flex w-64 flex-col border-r border-gray-200 bg-white">
@@ -42,24 +49,52 @@ export function AdminSidebar({ isAdmin }: { isAdmin: boolean }) {
         <span className="text-xs text-muted-foreground">Admin</span>
       </div>
 
-      <nav className="flex-1 space-y-1 px-3 py-4">
-        {items.map((item) => {
-          const isActive = pathname === item.href || (item.href !== "/admin" && pathname.startsWith(item.href));
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
-                isActive
-                  ? "bg-primary/10 text-primary"
-                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-              }`}
-            >
-              <Icon name={item.icon} />
-              {item.label}
-            </Link>
-          );
-        })}
+      <nav className="flex-1 overflow-y-auto px-3 py-4">
+        <div className="space-y-1">
+          {topItems.map((item) => {
+            const isActive = pathname === item.href || (item.href !== "/admin" && pathname.startsWith(item.href));
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                  isActive
+                    ? "bg-primary/10 text-primary"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                }`}
+              >
+                <Icon name={item.icon} />
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
+
+        {/* Pages section */}
+        <div className="mt-6">
+          <p className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
+            Pages
+          </p>
+          <div className="space-y-1">
+            {pageItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                    isActive
+                      ? "bg-primary/10 text-primary"
+                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                  }`}
+                >
+                  <Icon name="FileText" />
+                  {item.label}
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       </nav>
 
       <div className="border-t border-gray-200 p-4">

@@ -170,10 +170,10 @@ export default async function AdminDashboard() {
             Blocs de contenu
           </h2>
           <Link
-            href="/admin/content"
+            href="/admin/pages/accueil"
             className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90"
           >
-            Aller à l&apos;éditeur →
+            Modifier les pages →
           </Link>
         </div>
 
