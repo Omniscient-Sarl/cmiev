@@ -40,7 +40,7 @@ export function Footer({ locale, dict }: FooterProps) {
           {/* Column 2: Quick links */}
           <div className="space-y-4">
             <h4 className="font-heading text-lg font-semibold text-white">
-              {locale === "fr" ? "Navigation" : "Navigation"}
+              Navigation
             </h4>
             <ul className="space-y-2">
               {navLinks.map((link) => (
@@ -100,10 +100,10 @@ export function Footer({ locale, dict }: FooterProps) {
                   />
                 </svg>
                 <a
-                  href="tel:+41223456789"
+                  href="tel:+41227001100"
                   className="transition-colors duration-200 hover:text-white"
                 >
-                  +41 22 345 67 89
+                  +41 22 700 11 00
                 </a>
               </li>
               <li className="flex items-start gap-2">
@@ -131,27 +131,44 @@ export function Footer({ locale, dict }: FooterProps) {
             </ul>
           </div>
 
-          {/* Column 4: Opening hours */}
+          {/* Column 4: Map */}
           <div className="space-y-4">
             <h4 className="font-heading text-lg font-semibold text-white">
-              {locale === "fr" ? "Horaires" : "Opening Hours"}
+              {locale === "fr" ? "Nous trouver" : "Find us"}
             </h4>
-            <ul className="space-y-2 text-sm">
-              <li className="flex justify-between gap-4">
-                <span>{locale === "fr" ? "Lun - Ven" : "Mon - Fri"}</span>
-                <span className="text-white/90">08:00 - 19:00</span>
-              </li>
-              <li className="flex justify-between gap-4">
-                <span>{locale === "fr" ? "Samedi" : "Saturday"}</span>
-                <span className="text-white/90">09:00 - 13:00</span>
-              </li>
-              <li className="flex justify-between gap-4">
-                <span>{locale === "fr" ? "Dimanche" : "Sunday"}</span>
-                <span className="text-white/90">
-                  {locale === "fr" ? "Fermé" : "Closed"}
-                </span>
-              </li>
-            </ul>
+            <a
+              href="https://maps.google.com/?q=Rue+des+Eaux-Vives+3,+1207+Genève"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block aspect-[4/3] overflow-hidden rounded-xl"
+            >
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1380.7!2d6.1545!3d46.2030!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c653137f99337%3A0xc5c0c9e8b14070f9!2sRue%20des%20Eaux-Vives%203%2C%201207%20Gen%C3%A8ve!5e0!3m2!1sfr!2sch!4v1739734951508!5m2!1sfr!2sch"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title={locale === "fr" ? "Localisation du CMIEV" : "CMIEV location"}
+                className="pointer-events-none"
+              />
+              {/* Red pin overlay */}
+              <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                <div className="relative -mt-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    className="h-8 w-8 drop-shadow-lg"
+                    fill="#EA4335"
+                  >
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z" />
+                  </svg>
+                  <div className="absolute -bottom-0.5 left-1/2 h-1 w-2 -translate-x-1/2 rounded-full bg-black/20 blur-[1px]" />
+                </div>
+              </div>
+              {/* Hover overlay to hint it's clickable */}
+              <div className="absolute inset-0 bg-black/0 transition-colors duration-200 group-hover:bg-black/10" />
+            </a>
           </div>
         </div>
       </div>
