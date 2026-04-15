@@ -7,6 +7,7 @@ import { Hero } from "@/components/sections/Hero";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { AnimatedSection } from "@/components/sections/AnimatedSection";
 import { ContactCta } from "@/components/sections/ContactCta";
+import { getContentValue } from "@/lib/db/queries";
 
 export async function generateMetadata({
   params,
@@ -73,7 +74,7 @@ function ShieldIcon() {
 
 const benefitIcons = [PostureIcon, MuscleIcon, FlexIcon, MindIcon, ShieldIcon];
 
-const photoStripImages = [
+const defaultStripImages = [
   { src: "/images/pilates/pilates-reformer-1.webp", alt: "Pilates reformer exercise" },
   { src: "/images/pilates/pilates-mat-1.webp", alt: "Pilates mat workout" },
   { src: "/images/pilates/pilates-stretch-1.webp", alt: "Pilates stretching" },
@@ -90,13 +91,25 @@ export default async function PilatesPage({
   if (!isValidLocale(locale)) notFound();
   const dict = await getDictionary(locale as Locale);
 
+  const heroImage = await getContentValue("pilates.hero.image", "/images/pilates/pilates-hero.webp");
+  const whatIsImage = await getContentValue("pilates.whatIs.image", "/images/pilates/pilates-reformer-2.webp");
+  const sessionsImage = await getContentValue("pilates.sessions.image", "/images/pilates/pilates-studio-1.webp");
+  const pricingImage = await getContentValue("pilates.pricing.image", "/images/pilates/pilates-studio-2.webp");
+
+  const photoStripImages = await Promise.all(
+    defaultStripImages.map(async (img, i) => ({
+      src: await getContentValue(`pilates.strip.image.${i + 1}`, img.src),
+      alt: img.alt,
+    }))
+  );
+
   return (
     <>
       {/* ─── Hero ─── */}
       <Hero
         title={dict.pilates.title}
         subtitle={dict.pilates.subtitle}
-        imageSrc="/images/pilates/pilates-hero.webp"
+        imageSrc={heroImage}
         imageAlt="Séance de Pilates au CMIEV, Genève"
       />
 
@@ -121,7 +134,7 @@ export default async function PilatesPage({
 
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg">
               <Image
-                src="/images/pilates/pilates-reformer-2.webp"
+                src={whatIsImage}
                 alt="Pilates reformer exercise session"
                 fill
                 className="object-cover"
@@ -214,7 +227,7 @@ export default async function PilatesPage({
 
             <div className="relative order-1 aspect-[4/5] overflow-hidden rounded-2xl shadow-lg lg:order-2">
               <Image
-                src="/images/pilates/pilates-studio-1.webp"
+                src={sessionsImage}
                 alt="Pilates studio session"
                 fill
                 className="object-cover"
@@ -228,7 +241,7 @@ export default async function PilatesPage({
       {/* ─── Pricing ─── */}
       <section className="relative overflow-hidden py-20 sm:py-28 lg:py-32">
         <Image
-          src="/images/pilates/pilates-studio-2.webp"
+          src={pricingImage}
           alt=""
           fill
           className="object-cover"

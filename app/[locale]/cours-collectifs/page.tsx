@@ -7,6 +7,7 @@ import { Hero } from "@/components/sections/Hero";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { AnimatedSection } from "@/components/sections/AnimatedSection";
 import { ContactCta } from "@/components/sections/ContactCta";
+import { getContentValue } from "@/lib/db/queries";
 
 export async function generateMetadata({
   params,
@@ -30,7 +31,7 @@ export async function generateMetadata({
   };
 }
 
-const whyJoinImages = [
+const defaultWhyImages = [
   { src: "/images/pilates/pilates-group-1.webp", alt: "Group pilates session" },
   { src: "/images/cours/group-class-3.webp", alt: "Fitness group training" },
   { src: "/images/cours/group-class-1.webp", alt: "Wellness group class" },
@@ -52,6 +53,18 @@ export default async function GroupClassesPage({
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
   const dict = await getDictionary(locale as Locale);
+
+  const heroImage = await getContentValue("groupClasses.hero.image", "/images/cours/group-class-1.webp");
+  const introImage = await getContentValue("groupClasses.intro.image", "/images/cours/group-class-2.webp");
+  const gladImage = await getContentValue("groupClasses.glad.image", "/images/physiotherapy/physio-rehab-1.webp");
+
+  const whyJoinImages = await Promise.all(
+    defaultWhyImages.map(async (img, i) => ({
+      src: await getContentValue(`groupClasses.why.image.${i + 1}`, img.src),
+      alt: img.alt,
+    }))
+  );
+
   const schedule = dict.groupClasses.schedule;
   const days = [schedule.monday, schedule.tuesday, schedule.wednesday, schedule.thursday, schedule.friday];
 
@@ -61,7 +74,7 @@ export default async function GroupClassesPage({
       <Hero
         title={dict.groupClasses.title}
         subtitle={dict.groupClasses.subtitle}
-        imageSrc="/images/cours/group-class-1.webp"
+        imageSrc={heroImage}
         imageAlt="Group fitness class"
       />
 
@@ -96,7 +109,7 @@ export default async function GroupClassesPage({
 
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg">
               <Image
-                src="/images/cours/group-class-2.webp"
+                src={introImage}
                 alt="Wellness stretching class"
                 fill
                 className="object-cover"
@@ -187,7 +200,7 @@ export default async function GroupClassesPage({
       {/* ─── GLAD Callout Banner ─── */}
       <section className="relative overflow-hidden py-16 sm:py-20">
         <Image
-          src="/images/physiotherapy/physio-rehab-1.webp"
+          src={gladImage}
           alt=""
           fill
           className="object-cover"

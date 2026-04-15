@@ -5,6 +5,7 @@ import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { GalleryGrid } from "@/components/sections/GalleryGrid";
+import { getContentValue } from "@/lib/db/queries";
 
 const galleryImages = [
   { src: "/images/galerie/cabinet-01.webp", key: "1" },
@@ -19,7 +20,7 @@ const galleryImages = [
   { src: "/images/galerie/cabinet-10.webp", key: "10" },
 ];
 
-const marqueeImages = galleryImages.map((img) => img.src);
+// marqueeImages is computed dynamically after DB lookup
 
 export async function generateMetadata({
   params,
@@ -52,10 +53,14 @@ export default async function GalleryPage({
   if (!isValidLocale(locale)) notFound();
   const dict = await getDictionary(locale as Locale);
 
-  const images = galleryImages.map((img) => ({
-    src: img.src,
-    alt: `${dict.gallery.imageAlt} ${img.key}`,
-  }));
+  const images = await Promise.all(
+    galleryImages.map(async (img) => ({
+      src: await getContentValue(`gallery.image.${img.key}`, img.src),
+      alt: `${dict.gallery.imageAlt} ${img.key}`,
+    }))
+  );
+
+  const marqueeImageSrcs = images.map((img) => img.src);
 
   return (
     <>
@@ -63,11 +68,11 @@ export default async function GalleryPage({
       <section className="relative flex h-[calc(100dvh-5rem)] overflow-hidden">
         <div className="absolute inset-0 flex items-center">
           <div className="flex h-full animate-[marquee_60s_linear_infinite] will-change-transform">
-            {[...marqueeImages, ...marqueeImages].map((src, i) => (
+            {[...marqueeImageSrcs, ...marqueeImageSrcs].map((src, i) => (
               <div key={i} className="relative h-full w-[50vw] shrink-0 sm:w-[35vw] lg:w-[25vw]">
                 <Image
                   src={src}
-                  alt={`CMIEV gallery ${(i % marqueeImages.length) + 1}`}
+                  alt={`CMIEV gallery ${(i % marqueeImageSrcs.length) + 1}`}
                   fill
                   className="object-cover"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 35vw, 25vw"

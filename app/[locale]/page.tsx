@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { isValidLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
-import { getVisiblePractitioners } from "@/lib/db/queries";
+import { getVisiblePractitioners, getContentValue } from "@/lib/db/queries";
 import { Hero } from "@/components/sections/Hero";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { AnimatedSection } from "@/components/sections/AnimatedSection";
@@ -90,6 +90,14 @@ export default async function HomePage({
   const allPractitioners = await getVisiblePractitioners();
   const featuredPractitioners = allPractitioners.filter((p) => p.image).slice(0, 3);
 
+  const heroImage = await getContentValue("home.hero.image", "/images/hero/accueil.webp");
+  const aboutImage = await getContentValue("home.about.image", "/images/galerie/cabinet-01.webp");
+  const quoteImage = await getContentValue("home.quote.image", "/images/galerie/cabinet-06.webp");
+  const galleryImg1 = await getContentValue("home.gallery.image.1", "/images/galerie/cabinet-01.webp");
+  const galleryImg2 = await getContentValue("home.gallery.image.2", "/images/pilates/pilates-reformer-1.webp");
+  const galleryImg3 = await getContentValue("home.gallery.image.3", "/images/physiotherapy/physio-treatment-2.webp");
+  const galleryImg4 = await getContentValue("home.gallery.image.4", "/images/wellness/wellness-studio-1.webp");
+
   return (
     <>
       <script
@@ -105,7 +113,7 @@ export default async function HomePage({
         subtitle={dict.home.heroSubtitle}
         ctaText={dict.home.heroCta}
         ctaHref={`/${locale}/praticiens`}
-        imageSrc="/images/hero/accueil.webp"
+        imageSrc={heroImage}
         imageAlt="Centre de Médecine Intégrative des Eaux-Vives, Genève"
       />
 
@@ -153,7 +161,7 @@ export default async function HomePage({
             </div>
             <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
               <Image
-                src="/images/galerie/cabinet-01.webp"
+                src={aboutImage}
                 alt="Salle de consultation du CMIEV, Genève"
                 fill
                 className="object-cover"
@@ -201,7 +209,7 @@ export default async function HomePage({
       <section className="relative overflow-hidden bg-primary py-20 sm:py-28 lg:py-36">
         <div className="absolute inset-0 opacity-10">
           <Image
-            src="/images/galerie/cabinet-06.webp"
+            src={quoteImage}
             alt=""
             fill
             className="object-cover"
@@ -280,10 +288,10 @@ export default async function HomePage({
           </div>
           <div className="mt-12 grid grid-cols-2 gap-4 sm:mt-16 lg:grid-cols-4">
             {[
-              { src: "/images/galerie/cabinet-01.webp", alt: "Salle de consultation CMIEV" },
-              { src: "/images/pilates/pilates-reformer-1.webp", alt: "Pilates reformer session" },
-              { src: "/images/physiotherapy/physio-treatment-2.webp", alt: "Physiotherapy treatment" },
-              { src: "/images/wellness/wellness-studio-1.webp", alt: "Wellness studio" },
+              { src: galleryImg1, alt: "Salle de consultation CMIEV" },
+              { src: galleryImg2, alt: "Pilates reformer session" },
+              { src: galleryImg3, alt: "Physiotherapy treatment" },
+              { src: galleryImg4, alt: "Wellness studio" },
             ].map((img) => (
               <div
                 key={img.src}

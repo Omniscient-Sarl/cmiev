@@ -7,6 +7,7 @@ import {
   updateContentBlock,
   getImageBlocks,
   saveImageUrl,
+  deleteImageUrl,
 } from "./actions";
 import { useUploadThing } from "@/lib/uploadthing";
 
@@ -42,16 +43,29 @@ const PAGE_IMAGES: Record<string, { keySuffix: string; label: string }[]> = {
     { keySuffix: "hero.image", label: "Image hero" },
     { keySuffix: "about.image", label: "Image section À propos" },
     { keySuffix: "quote.image", label: "Image citation" },
+    { keySuffix: "gallery.image.1", label: "Galerie 1" },
+    { keySuffix: "gallery.image.2", label: "Galerie 2" },
+    { keySuffix: "gallery.image.3", label: "Galerie 3" },
+    { keySuffix: "gallery.image.4", label: "Galerie 4" },
   ],
   pilates: [
     { keySuffix: "hero.image", label: "Image hero" },
-    { keySuffix: "whatIs.image", label: "Image Qu'est-ce que le Pilates" },
+    { keySuffix: "whatIs.image", label: "Image Qu&apos;est-ce que le Pilates" },
     { keySuffix: "sessions.image", label: "Image séances" },
     { keySuffix: "pricing.image", label: "Image tarifs" },
+    { keySuffix: "strip.image.1", label: "Bandeau 1" },
+    { keySuffix: "strip.image.2", label: "Bandeau 2" },
+    { keySuffix: "strip.image.3", label: "Bandeau 3" },
+    { keySuffix: "strip.image.4", label: "Bandeau 4" },
+    { keySuffix: "strip.image.5", label: "Bandeau 5" },
   ],
   "cours-collectifs": [
     { keySuffix: "hero.image", label: "Image hero" },
     { keySuffix: "intro.image", label: "Image introduction" },
+    { keySuffix: "why.image.1", label: "Pourquoi 1" },
+    { keySuffix: "why.image.2", label: "Pourquoi 2" },
+    { keySuffix: "why.image.3", label: "Pourquoi 3" },
+    { keySuffix: "glad.image", label: "Image GLAD" },
   ],
   galerie: [
     { keySuffix: "image.1", label: "Photo 1" },
@@ -96,7 +110,7 @@ export default function PageEditorPage({
     const textBlocks: ContentBlock[] = [];
     const imgMap: Record<string, string> = {};
     for (const block of data) {
-      if (block.key.endsWith(".image")) {
+      if (block.key.includes("image")) {
         imgMap[block.key] = block.value;
       } else {
         textBlocks.push(block);
@@ -142,6 +156,16 @@ export default function PageEditorPage({
     } finally {
       setUploadingKey(null);
     }
+  }
+
+  async function handleImageDelete(fullKey: string) {
+    if (!confirm("Supprimer cette image ?")) return;
+    await deleteImageUrl(fullKey);
+    setImageUrls((prev) => {
+      const next = { ...prev };
+      delete next[fullKey];
+      return next;
+    });
   }
 
   if (!prefix) {
@@ -278,17 +302,34 @@ export default function PageEditorPage({
                     )}
                   </div>
 
-                  {/* Upload input */}
-                  <input
-                    type="file"
-                    accept="image/*"
-                    disabled={isUploading}
-                    onChange={(e) => {
-                      const file = e.target.files?.[0];
-                      if (file) handleImageUpload(fullKey, file);
-                    }}
-                    className="w-full text-sm text-gray-600 file:mr-3 file:rounded file:border-0 file:bg-blue-50 file:px-3 file:py-1.5 file:text-sm file:font-medium file:text-blue-700 hover:file:bg-blue-100 disabled:opacity-50"
-                  />
+                  {/* Actions */}
+                  <div className="flex items-center gap-2">
+                    <label className="flex-1 cursor-pointer">
+                      <span className="inline-block w-full rounded bg-blue-50 px-3 py-1.5 text-center text-sm font-medium text-blue-700 transition-colors hover:bg-blue-100">
+                        {currentUrl ? "Remplacer" : "Ajouter"}
+                      </span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        disabled={isUploading}
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) handleImageUpload(fullKey, file);
+                        }}
+                        className="hidden"
+                      />
+                    </label>
+                    {currentUrl && (
+                      <button
+                        type="button"
+                        onClick={() => handleImageDelete(fullKey)}
+                        disabled={isUploading}
+                        className="rounded bg-red-50 px-3 py-1.5 text-sm font-medium text-red-700 transition-colors hover:bg-red-100 disabled:opacity-50"
+                      >
+                        Supprimer
+                      </button>
+                    )}
+                  </div>
                   <p className="mt-1 text-xs text-gray-400">
                     {fullKey}
                   </p>

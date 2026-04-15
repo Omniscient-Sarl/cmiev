@@ -6,6 +6,7 @@ import Image from "next/image";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { contactPageJsonLd } from "@/lib/jsonld";
+import { getContentValue } from "@/lib/db/queries";
 
 export async function generateMetadata({
   params,
@@ -37,6 +38,7 @@ export default async function ContactPage({
   const { locale } = await params;
   if (!isValidLocale(locale)) notFound();
   const dict = await getDictionary(locale as Locale);
+  const heroImage = await getContentValue("contact.hero.image", "/images/galerie/cabinet-01.webp");
 
   return (
     <>
@@ -49,7 +51,7 @@ export default async function ContactPage({
       {/* Contact Hero — welcoming cabinet interior with sage overlay */}
       <section className="relative flex h-[calc(100dvh-5rem)] overflow-hidden">
         <Image
-          src="/images/galerie/cabinet-01.webp"
+          src={heroImage}
           alt="Salle d'accueil du CMIEV, Genève"
           fill
           className="object-cover"

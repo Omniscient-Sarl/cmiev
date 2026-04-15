@@ -2,7 +2,7 @@
 
 import { db } from "@/lib/db";
 import { siteContent } from "@/lib/db/schema";
-import { like } from "drizzle-orm";
+import { eq, like } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { auth } from "@clerk/nextjs/server";
 
@@ -43,7 +43,18 @@ export async function getImageBlocks(prefix: string) {
   return db
     .select()
     .from(siteContent)
-    .where(like(siteContent.key, `${prefix}.%.image`));
+    .where(like(siteContent.key, `${prefix}.%image%`));
+}
+
+export async function deleteImageUrl(key: string) {
+  const { userId } = await auth();
+  if (!userId) throw new Error("Unauthorized");
+
+  await db.delete(siteContent).where(eq(siteContent.key, key));
+
+  revalidatePath("/admin/pages");
+  revalidatePath("/fr");
+  revalidatePath("/en");
 }
 
 export async function saveImageUrl(key: string, url: string) {
