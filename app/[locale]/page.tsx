@@ -58,6 +58,8 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
   const dict = await getDictionary(locale);
+  const heroImage = await getContentValue("home.hero.image", "/images/hero/accueil.webp");
+  const ogImageUrl = heroImage.startsWith("http") ? heroImage : `https://cmiev.ch${heroImage}`;
   return {
     title: dict.metadata.siteName,
     description: dict.metadata.siteDescription,
@@ -72,13 +74,13 @@ export async function generateMetadata({
       siteName: "CMIEV",
       locale: locale === "fr" ? "fr_CH" : "en_GB",
       type: "website",
-      images: [{ url: "https://cmiev.ch/og-default.jpg", width: 1200, height: 630, alt: dict.metadata.siteName }],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: dict.metadata.siteName }],
     },
     twitter: {
       card: "summary_large_image",
       title: dict.metadata.siteName,
       description: dict.metadata.siteDescription,
-      images: ["https://cmiev.ch/og-default.jpg"],
+      images: [ogImageUrl],
     },
   };
 }

@@ -18,6 +18,8 @@ export async function generateMetadata({
   const dict = await getDictionary(locale);
   const title = dict.contact.title;
   const description = dict.contact.subtitle;
+  const heroImage = await getContentValue("contact.hero.image", "/images/galerie/cabinet-01.webp");
+  const ogImageUrl = heroImage.startsWith("http") ? heroImage : `https://cmiev.ch${heroImage}`;
   return {
     title,
     description,
@@ -25,8 +27,8 @@ export async function generateMetadata({
       canonical: `https://cmiev.ch/${locale}/contact`,
       languages: { fr: "https://cmiev.ch/fr/contact", en: "https://cmiev.ch/en/contact" },
     },
-    openGraph: { title, description, url: `https://cmiev.ch/${locale}/contact`, siteName: "CMIEV", locale: locale === "fr" ? "fr_CH" : "en_GB", type: "website", images: [{ url: "https://cmiev.ch/og-default.jpg", width: 1200, height: 630, alt: title }] },
-    twitter: { card: "summary_large_image", title, description, images: ["https://cmiev.ch/og-default.jpg"] },
+    openGraph: { title, description, url: `https://cmiev.ch/${locale}/contact`, siteName: "CMIEV", locale: locale === "fr" ? "fr_CH" : "en_GB", type: "website", images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }] },
+    twitter: { card: "summary_large_image", title, description, images: [ogImageUrl] },
   };
 }
 

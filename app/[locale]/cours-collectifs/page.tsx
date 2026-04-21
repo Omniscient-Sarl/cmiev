@@ -19,6 +19,8 @@ export async function generateMetadata({
   const dict = await getDictionary(locale);
   const title = dict.groupClasses.title;
   const description = dict.groupClasses.subtitle;
+  const heroImage = await getContentValue("groupClasses.hero.image", "/images/cours/group-class-1.webp");
+  const ogImageUrl = heroImage.startsWith("http") ? heroImage : `https://cmiev.ch${heroImage}`;
   return {
     title,
     description,
@@ -26,8 +28,8 @@ export async function generateMetadata({
       canonical: `https://cmiev.ch/${locale}/cours-collectifs`,
       languages: { fr: "https://cmiev.ch/fr/cours-collectifs", en: "https://cmiev.ch/en/cours-collectifs" },
     },
-    openGraph: { title, description, url: `https://cmiev.ch/${locale}/cours-collectifs`, siteName: "CMIEV", locale: locale === "fr" ? "fr_CH" : "en_GB", type: "website", images: [{ url: "https://cmiev.ch/og-default.jpg", width: 1200, height: 630, alt: title }] },
-    twitter: { card: "summary_large_image", title, description, images: ["https://cmiev.ch/og-default.jpg"] },
+    openGraph: { title, description, url: `https://cmiev.ch/${locale}/cours-collectifs`, siteName: "CMIEV", locale: locale === "fr" ? "fr_CH" : "en_GB", type: "website", images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }] },
+    twitter: { card: "summary_large_image", title, description, images: [ogImageUrl] },
   };
 }
 

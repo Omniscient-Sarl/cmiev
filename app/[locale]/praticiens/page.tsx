@@ -29,6 +29,7 @@ export async function generateMetadata({
   const dict = await getDictionary(locale);
   const title = dict.practitioners.title;
   const description = dict.practitioners.subtitle;
+  const ogImageUrl = `https://cmiev.ch${practitionerPhotos[0].src}`;
   return {
     title,
     description,
@@ -43,9 +44,9 @@ export async function generateMetadata({
       siteName: "CMIEV",
       locale: locale === "fr" ? "fr_CH" : "en_GB",
       type: "website",
-      images: [{ url: "https://cmiev.ch/og-default.jpg", width: 1200, height: 630, alt: title }],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
     },
-    twitter: { card: "summary_large_image", title, description, images: ["https://cmiev.ch/og-default.jpg"] },
+    twitter: { card: "summary_large_image", title, description, images: [ogImageUrl] },
   };
 }
 

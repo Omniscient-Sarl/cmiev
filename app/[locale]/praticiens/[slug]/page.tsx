@@ -28,9 +28,11 @@ export async function generateMetadata({
   if (!practitioner) return {};
   const title = `${practitioner.name} — ${practitioner.title[locale as Locale]}, Genève`;
   const description = `${practitioner.name}, ${practitioner.title[locale as Locale]} au CMIEV, Eaux-Vives, Genève. ${practitioner.specialties[locale as Locale].join(", ")}.`;
-  const ogImage = practitioner.image
-    ? `https://cmiev.ch${practitioner.image}`
-    : "https://cmiev.ch/og-default.jpg";
+  const rawImage = practitioner.image ?? "/og-default.jpg";
+  const ogImage = rawImage.startsWith("http") ? rawImage : `https://cmiev.ch${rawImage}`;
+  const nameParts = practitioner.name.split(" ");
+  const firstName = nameParts[0];
+  const lastName = nameParts.slice(1).join(" ");
   return {
     title,
     description,
@@ -48,6 +50,8 @@ export async function generateMetadata({
       siteName: "CMIEV",
       locale: locale === "fr" ? "fr_CH" : "en_GB",
       type: "profile",
+      firstName,
+      lastName,
       images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: { card: "summary_large_image", title, description, images: [ogImage] },
