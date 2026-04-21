@@ -79,6 +79,11 @@ const en = {
         description: "Individual and group classes to strengthen the body, improve posture and mobility.",
         icon: "pilates",
       },
+      {
+        title: "Functional medicine",
+        description: "An individualised approach aimed at identifying and treating the root causes of metabolic and functional imbalances.",
+        icon: "functional",
+      },
     ],
     teamTitle: "Our team",
     teamSubtitle: "Passionate and experienced practitioners",
@@ -117,6 +122,7 @@ const en = {
       ru: "Russian",
       zh: "Chinese",
       ja: "Japanese",
+      fa: "Persian",
     },
   },
   pilates: {

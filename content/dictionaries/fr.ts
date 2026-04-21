@@ -79,6 +79,11 @@ const fr = {
         description: "Cours individuels et collectifs pour renforcer le corps, améliorer la posture et la mobilité.",
         icon: "pilates",
       },
+      {
+        title: "Médecine fonctionnelle",
+        description: "Approche individualisée visant à identifier et traiter les causes profondes des déséquilibres métaboliques et fonctionnels.",
+        icon: "functional",
+      },
     ],
     teamTitle: "Notre équipe",
     teamSubtitle: "Des praticiens passionnés et expérimentés",
@@ -117,6 +122,7 @@ const fr = {
       ru: "Russe",
       zh: "Chinois",
       ja: "Japonais",
+      fa: "Persan",
     },
   },
   pilates: {
