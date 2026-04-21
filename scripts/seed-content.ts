@@ -53,8 +53,6 @@ const DEFAULT_CONTENT: Record<string, string> = {
   "contact.subtitle.en":
     "Book an appointment or ask us your questions",
   "contact.address": "Rue des Eaux-Vives 3, 1207 Genève, Suisse",
-  "contact.phone": "+41 22 700 11 00",
-  "contact.email": "info@cmiev.ch",
 
   // Pilates page
   "pilates.title.fr": "Pilates au CMIEV",

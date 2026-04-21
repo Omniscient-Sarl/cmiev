@@ -266,7 +266,6 @@ const fr = {
     quickLinks: "Liens rapides",
     contactTitle: "Contact",
     phone: "+41 22 700 53 33",
-    email: "info@cmiev.ch",
     hoursTitle: "Horaires",
     hours: "Lun – Ven : 8h00 – 19h00",
     hoursSat: "Sam : sur rendez-vous",
