@@ -17,6 +17,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       entries.push({
         url: `${BASE_URL}/${locale}${page}`,
         lastModified: now,
+        changeFrequency: "weekly",
+        priority: page === "" ? 1 : 0.8,
         alternates: {
           languages: Object.fromEntries(
             locales.map((l) => [l, `${BASE_URL}/${l}${page}`])
@@ -31,6 +33,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       entries.push({
         url: `${BASE_URL}/${locale}/praticiens/${practitioner.slug}`,
         lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.7,
         alternates: {
           languages: Object.fromEntries(
             locales.map((l) => [l, `${BASE_URL}/${l}/praticiens/${practitioner.slug}`])
