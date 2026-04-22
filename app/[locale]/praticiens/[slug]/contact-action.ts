@@ -5,7 +5,6 @@ import { resend, FROM_EMAIL } from "@/lib/resend";
 import { db } from "@/lib/db";
 import { practitioners as practitionersTable } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
-import { getPractitionerBySlug } from "@/lib/practitioners";
 
 export async function submitPractitionerContact(data: PractitionerContactData) {
   const parsed = practitionerContactSchema.safeParse(data);
@@ -19,28 +18,14 @@ export async function submitPractitionerContact(data: PractitionerContactData) {
 
   const { name, email, phone, message, practitionerSlug } = parsed.data;
 
-  // Try DB first, fall back to static data
-  let practitionerEmail: string | null = null;
-  let practitionerName = "";
-
-  const [dbPractitioner] = await db
+  // Look up practitioner from DB
+  const [practitioner] = await db
     .select({ email: practitionersTable.email, nameFr: practitionersTable.nameFr })
     .from(practitionersTable)
     .where(eq(practitionersTable.slug, practitionerSlug))
     .limit(1);
 
-  if (dbPractitioner?.email) {
-    practitionerEmail = dbPractitioner.email;
-    practitionerName = dbPractitioner.nameFr;
-  } else {
-    const staticPractitioner = getPractitionerBySlug(practitionerSlug);
-    if (staticPractitioner?.email) {
-      practitionerEmail = staticPractitioner.email;
-      practitionerName = staticPractitioner.name;
-    }
-  }
-
-  if (!practitionerEmail) {
+  if (!practitioner?.email) {
     return { success: false, error: "Practitioner not found" };
   }
 
@@ -48,15 +33,18 @@ export async function submitPractitionerContact(data: PractitionerContactData) {
     // Send to practitioner
     await resend.emails.send({
       from: FROM_EMAIL,
-      to: practitionerEmail,
-      subject: `[CMIEV] Nouveau message de ${name}`,
+      to: practitioner.email,
+      subject: `Nouveau message via cmiev.ch — ${practitioner.nameFr}`,
       html: `
-        <h2>Nouveau message via le site CMIEV</h2>
-        <p><strong>De :</strong> ${name}</p>
+        <h2>Nouveau message via cmiev.ch</h2>
+        <hr style="border:none;border-top:1px solid #e5e5e5;margin:16px 0" />
+        <p><strong>Nom :</strong> ${name}</p>
         <p><strong>Email :</strong> ${email}</p>
         <p><strong>Téléphone :</strong> ${phone || "Non renseigné"}</p>
         <p><strong>Message :</strong></p>
         <p>${message.replace(/\n/g, "<br>")}</p>
+        <hr style="border:none;border-top:1px solid #e5e5e5;margin:16px 0" />
+        <p style="color:#888;font-size:12px">Envoyé depuis cmiev.ch</p>
       `,
     });
 
@@ -64,11 +52,13 @@ export async function submitPractitionerContact(data: PractitionerContactData) {
     await resend.emails.send({
       from: FROM_EMAIL,
       to: email,
-      subject: `Confirmation — ${practitionerName}, CMIEV`,
+      subject: "Votre message a bien été envoyé — CMIEV",
       html: `
-        <h2>Merci pour votre message</h2>
-        <p>Votre message a été transmis à ${practitionerName}. Vous recevrez une réponse dans les plus brefs délais.</p>
-        <p>— Centre de Médecine Intégrative des Eaux-Vives</p>
+        <h2>Bonjour ${name},</h2>
+        <p>Votre message a bien été transmis à <strong>${practitioner.nameFr}</strong>.</p>
+        <p>Vous recevrez une réponse dans les meilleurs délais.</p>
+        <hr style="border:none;border-top:1px solid #e5e5e5;margin:16px 0" />
+        <p><strong>CMIEV — Centre de Médecine Intégrative des Eaux-Vives</strong></p>
         <p>Rue des Eaux-Vives 3, 1207 Genève</p>
       `,
     });

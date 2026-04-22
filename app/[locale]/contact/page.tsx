@@ -6,7 +6,7 @@ import Image from "next/image";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { ContactForm } from "@/components/sections/ContactForm";
 import { contactPageJsonLd } from "@/lib/jsonld";
-import { getContentValue } from "@/lib/db/queries";
+import { getContentValue, getVisiblePractitioners } from "@/lib/db/queries";
 
 export async function generateMetadata({
   params,
@@ -41,6 +41,11 @@ export default async function ContactPage({
   if (!isValidLocale(locale)) notFound();
   const dict = await getDictionary(locale as Locale);
   const heroImage = await getContentValue("contact.hero.image", "/images/galerie/cabinet-01.webp");
+  const allPractitioners = await getVisiblePractitioners();
+  const practitionerOptions = allPractitioners.map((p) => ({
+    slug: p.slug,
+    label: `${p.name} (${p.title[locale as Locale]})`,
+  }));
 
   return (
     <>
@@ -82,7 +87,24 @@ export default async function ContactPage({
                 {dict.contact.title}
               </h2>
             </div>
-            <ContactForm dict={dict.contact} />
+            <ContactForm practitioners={practitionerOptions} dict={{
+              nameLabel: dict.contact.nameLabel,
+              namePlaceholder: dict.contact.namePlaceholder,
+              emailLabel: dict.contact.emailLabel,
+              emailPlaceholder: dict.contact.emailPlaceholder,
+              phoneLabel: dict.contact.phoneLabel,
+              phonePlaceholder: dict.contact.phonePlaceholder,
+              practitionerLabel: locale === "fr" ? "Praticien" : "Practitioner",
+              practitionerPlaceholder: locale === "fr" ? "Choisir un praticien" : "Choose a practitioner",
+              messageLabel: dict.contact.messageLabel,
+              messagePlaceholder: dict.contact.messagePlaceholder,
+              submit: dict.contact.submit,
+              sending: dict.contact.sending,
+              successTitle: dict.contact.successTitle,
+              successMessage: dict.contact.successMessage,
+              errorTitle: dict.contact.errorTitle,
+              errorMessage: dict.contact.errorMessage,
+            }} />
           </div>
 
           {/* Right column: Contact info card + Map */}

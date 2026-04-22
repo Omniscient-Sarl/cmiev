@@ -9,10 +9,9 @@ function getResend() {
   return _resend;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const resend = new Proxy({} as Resend, {
-  get(_, prop) {
-    return (getResend() as any)[prop];
+  get(_, prop: string) {
+    return getResend()[prop as keyof Resend];
   },
 });
 

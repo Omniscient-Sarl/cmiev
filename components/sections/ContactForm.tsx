@@ -17,7 +17,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+interface PractitionerOption {
+  slug: string;
+  label: string;
+}
+
 interface ContactFormProps {
+  practitioners: PractitionerOption[];
   dict: {
     nameLabel: string;
     namePlaceholder: string;
@@ -25,13 +31,8 @@ interface ContactFormProps {
     emailPlaceholder: string;
     phoneLabel: string;
     phonePlaceholder: string;
-    subjectLabel: string;
-    subjectPlaceholder: string;
-    subjects: {
-      appointment: string;
-      general: string;
-      other: string;
-    };
+    practitionerLabel: string;
+    practitionerPlaceholder: string;
     messageLabel: string;
     messagePlaceholder: string;
     submit: string;
@@ -43,7 +44,7 @@ interface ContactFormProps {
   };
 }
 
-export function ContactForm({ dict }: ContactFormProps) {
+export function ContactForm({ practitioners, dict }: ContactFormProps) {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   const {
@@ -58,7 +59,7 @@ export function ContactForm({ dict }: ContactFormProps) {
       name: "",
       email: "",
       phone: "",
-      subject: undefined,
+      practitionerSlug: "",
       message: "",
       honeypot: "",
     },
@@ -129,18 +130,20 @@ export function ContactForm({ dict }: ContactFormProps) {
       </div>
 
       <div>
-        <Label htmlFor="subject">{dict.subjectLabel}</Label>
-        <Select onValueChange={(value) => setValue("subject", value as ContactFormData["subject"])}>
-          <SelectTrigger id="subject" className="mt-1.5" aria-invalid={!!errors.subject}>
-            <SelectValue placeholder={dict.subjectPlaceholder} />
+        <Label htmlFor="practitioner">{dict.practitionerLabel}</Label>
+        <Select onValueChange={(value: string | null) => { if (value) setValue("practitionerSlug", value); }}>
+          <SelectTrigger id="practitioner" className="mt-1.5" aria-invalid={!!errors.practitionerSlug}>
+            <SelectValue placeholder={dict.practitionerPlaceholder} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="appointment">{dict.subjects.appointment}</SelectItem>
-            <SelectItem value="general">{dict.subjects.general}</SelectItem>
-            <SelectItem value="other">{dict.subjects.other}</SelectItem>
+            {practitioners.map((p) => (
+              <SelectItem key={p.slug} value={p.slug}>
+                {p.label}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
-        {errors.subject && <p className="mt-1 text-sm text-destructive">{errors.subject.message}</p>}
+        {errors.practitionerSlug && <p className="mt-1 text-sm text-destructive">{errors.practitionerSlug.message}</p>}
       </div>
 
       <div>

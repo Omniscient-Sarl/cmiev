@@ -1,7 +1,10 @@
 "use server";
 
 import { contactFormSchema, type ContactFormData } from "@/lib/schemas";
-import { resend, CLINIC_EMAIL, FROM_EMAIL } from "@/lib/resend";
+import { resend, FROM_EMAIL } from "@/lib/resend";
+import { db } from "@/lib/db";
+import { practitioners as practitionersTable } from "@/lib/db/schema";
+import { eq } from "drizzle-orm";
 
 export async function submitContactForm(data: ContactFormData) {
   const parsed = contactFormSchema.safeParse(data);
@@ -11,44 +14,52 @@ export async function submitContactForm(data: ContactFormData) {
 
   // Honeypot check
   if (parsed.data.honeypot) {
-    // Silently succeed (it's a bot)
     return { success: true };
   }
 
-  const { name, email, phone, subject, message } = parsed.data;
+  const { name, email, phone, practitionerSlug, message } = parsed.data;
 
-  const subjectLabels: Record<string, string> = {
-    appointment: "Prise de rendez-vous",
-    general: "Question générale",
-    other: "Autre",
-  };
+  // Look up practitioner email from DB
+  const [practitioner] = await db
+    .select({ email: practitionersTable.email, nameFr: practitionersTable.nameFr })
+    .from(practitionersTable)
+    .where(eq(practitionersTable.slug, practitionerSlug))
+    .limit(1);
+
+  if (!practitioner?.email) {
+    return { success: false, error: "Practitioner not found" };
+  }
 
   try {
-    // Send to clinic
+    // Send to practitioner
     await resend.emails.send({
       from: FROM_EMAIL,
-      to: CLINIC_EMAIL,
-      subject: `[CMIEV] ${subjectLabels[subject]} — ${name}`,
+      to: practitioner.email,
+      subject: `Nouveau message via cmiev.ch — ${practitioner.nameFr}`,
       html: `
-        <h2>Nouveau message de contact</h2>
+        <h2>Nouveau message via cmiev.ch</h2>
+        <hr style="border:none;border-top:1px solid #e5e5e5;margin:16px 0" />
         <p><strong>Nom :</strong> ${name}</p>
         <p><strong>Email :</strong> ${email}</p>
         <p><strong>Téléphone :</strong> ${phone || "Non renseigné"}</p>
-        <p><strong>Sujet :</strong> ${subjectLabels[subject]}</p>
         <p><strong>Message :</strong></p>
         <p>${message.replace(/\n/g, "<br>")}</p>
+        <hr style="border:none;border-top:1px solid #e5e5e5;margin:16px 0" />
+        <p style="color:#888;font-size:12px">Envoyé depuis cmiev.ch</p>
       `,
     });
 
-    // Send confirmation to user
+    // Send confirmation to sender
     await resend.emails.send({
       from: FROM_EMAIL,
       to: email,
-      subject: "Confirmation — CMIEV",
+      subject: "Votre message a bien été envoyé — CMIEV",
       html: `
-        <h2>Merci pour votre message</h2>
-        <p>Nous avons bien reçu votre demande et vous répondrons dans les plus brefs délais.</p>
-        <p>— Centre de Médecine Intégrative des Eaux-Vives</p>
+        <h2>Bonjour ${name},</h2>
+        <p>Votre message a bien été transmis à <strong>${practitioner.nameFr}</strong>.</p>
+        <p>Vous recevrez une réponse dans les meilleurs délais.</p>
+        <hr style="border:none;border-top:1px solid #e5e5e5;margin:16px 0" />
+        <p><strong>CMIEV — Centre de Médecine Intégrative des Eaux-Vives</strong></p>
         <p>Rue des Eaux-Vives 3, 1207 Genève</p>
       `,
     });
