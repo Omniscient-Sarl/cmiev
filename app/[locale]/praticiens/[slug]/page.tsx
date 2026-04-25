@@ -285,7 +285,7 @@ export default async function PractitionerPage({
       </SectionWrapper>
 
       {/* Per-practitioner contact section */}
-      {practitioner.slug === "elio-bosani" && practitioner.phone ? (
+      {["elio-bosani", "severine-schwab", "corinne-dauve"].includes(practitioner.slug) && practitioner.phone ? (
         <SectionWrapper variant="cream" id="contact">
           <AnimatedSection>
             <div className="mx-auto max-w-2xl text-center">
