@@ -162,7 +162,9 @@ export function ContactForm({ practitioners, phoneOnlyPractitioners = [], locale
             <div className="rounded-2xl bg-[#f5f0e8] p-8 text-center">
               <p className="text-muted-foreground">
                 {locale === "fr"
-                  ? "Ce praticien préfère être contacté directement par téléphone."
+                  ? phoneOnly.slug === "elio-bosani"
+                    ? "Ce praticien préfère être contacté directement par téléphone."
+                    : "Cette praticienne préfère être contactée directement par téléphone."
                   : "This practitioner prefers to be contacted directly by phone."}
               </p>
               <a
