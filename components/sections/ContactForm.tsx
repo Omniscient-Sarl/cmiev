@@ -22,8 +22,16 @@ interface PractitionerOption {
   label: string;
 }
 
+interface PhoneOnlyPractitioner {
+  slug: string;
+  name: string;
+  phone: string;
+}
+
 interface ContactFormProps {
   practitioners: PractitionerOption[];
+  phoneOnlyPractitioners?: PhoneOnlyPractitioner[];
+  locale?: string;
   dict: {
     nameLabel: string;
     namePlaceholder: string;
@@ -44,8 +52,9 @@ interface ContactFormProps {
   };
 }
 
-export function ContactForm({ practitioners, dict }: ContactFormProps) {
+export function ContactForm({ practitioners, phoneOnlyPractitioners = [], locale = "fr", dict }: ContactFormProps) {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [selectedSlug, setSelectedSlug] = useState("");
 
   const {
     register,
@@ -131,7 +140,7 @@ export function ContactForm({ practitioners, dict }: ContactFormProps) {
 
       <div>
         <Label htmlFor="practitioner">{dict.practitionerLabel}</Label>
-        <Select onValueChange={(value: string | null) => { if (value) setValue("practitionerSlug", value); }}>
+        <Select onValueChange={(value: string | null) => { if (value) { setValue("practitionerSlug", value); setSelectedSlug(value); } }}>
           <SelectTrigger id="practitioner" className="mt-1.5" aria-invalid={!!errors.practitionerSlug}>
             <SelectValue placeholder={dict.practitionerPlaceholder} />
           </SelectTrigger>
@@ -146,33 +155,62 @@ export function ContactForm({ practitioners, dict }: ContactFormProps) {
         {errors.practitionerSlug && <p className="mt-1 text-sm text-destructive">{errors.practitionerSlug.message}</p>}
       </div>
 
-      <div>
-        <Label htmlFor="message">{dict.messageLabel}</Label>
-        <Textarea
-          id="message"
-          placeholder={dict.messagePlaceholder}
-          rows={5}
-          {...register("message")}
-          aria-invalid={!!errors.message}
-          className="mt-1.5"
-        />
-        {errors.message && <p className="mt-1 text-sm text-destructive">{errors.message.message}</p>}
-      </div>
+      {(() => {
+        const phoneOnly = phoneOnlyPractitioners.find((p) => p.slug === selectedSlug);
+        if (phoneOnly) {
+          return (
+            <div className="rounded-2xl bg-[#f5f0e8] p-8 text-center">
+              <p className="text-muted-foreground">
+                {locale === "fr"
+                  ? "Ce praticien préfère être contacté directement par téléphone."
+                  : "This practitioner prefers to be contacted directly by phone."}
+              </p>
+              <a
+                href={`tel:${phoneOnly.phone.replace(/\s/g, "")}`}
+                className="mt-4 inline-flex items-center gap-3 rounded-xl bg-accent px-8 py-4 text-lg font-semibold text-accent-foreground shadow-lg shadow-accent/25 transition-all duration-200 hover:scale-105 hover:shadow-xl hover:shadow-accent/30 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none"
+              >
+                <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                </svg>
+                {phoneOnly.phone}
+              </a>
+            </div>
+          );
+        }
+        return null;
+      })()}
 
-      {status === "error" && (
-        <div className="rounded-lg bg-destructive/10 p-4">
-          <p className="text-sm font-medium text-destructive">{dict.errorTitle}</p>
-          <p className="text-sm text-destructive/80">{dict.errorMessage}</p>
-        </div>
+      {!phoneOnlyPractitioners.some((p) => p.slug === selectedSlug) && (
+        <>
+          <div>
+            <Label htmlFor="message">{dict.messageLabel}</Label>
+            <Textarea
+              id="message"
+              placeholder={dict.messagePlaceholder}
+              rows={5}
+              {...register("message")}
+              aria-invalid={!!errors.message}
+              className="mt-1.5"
+            />
+            {errors.message && <p className="mt-1 text-sm text-destructive">{errors.message.message}</p>}
+          </div>
+
+          {status === "error" && (
+            <div className="rounded-lg bg-destructive/10 p-4">
+              <p className="text-sm font-medium text-destructive">{dict.errorTitle}</p>
+              <p className="text-sm text-destructive/80">{dict.errorMessage}</p>
+            </div>
+          )}
+
+          <Button
+            type="submit"
+            disabled={status === "sending"}
+            className="w-full bg-accent text-accent-foreground hover:bg-warm-dark focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            {status === "sending" ? dict.sending : dict.submit}
+          </Button>
+        </>
       )}
-
-      <Button
-        type="submit"
-        disabled={status === "sending"}
-        className="w-full bg-accent text-accent-foreground hover:bg-warm-dark focus-visible:ring-2 focus-visible:ring-ring"
-      >
-        {status === "sending" ? dict.sending : dict.submit}
-      </Button>
     </form>
   );
 }

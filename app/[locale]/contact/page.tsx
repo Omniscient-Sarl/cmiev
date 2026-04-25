@@ -47,6 +47,11 @@ export default async function ContactPage({
     label: `${p.name} (${p.title[locale as Locale]})`,
   }));
 
+  const phoneOnlySlugs = ["elio-bosani", "severine-schwab", "corinne-dauve"];
+  const phoneOnlyPractitioners = allPractitioners
+    .filter((p) => phoneOnlySlugs.includes(p.slug) && p.phone)
+    .map((p) => ({ slug: p.slug, name: p.name, phone: p.phone }));
+
   return (
     <>
       <script
@@ -87,7 +92,7 @@ export default async function ContactPage({
                 {dict.contact.title}
               </h2>
             </div>
-            <ContactForm practitioners={practitionerOptions} dict={{
+            <ContactForm practitioners={practitionerOptions} phoneOnlyPractitioners={phoneOnlyPractitioners} locale={locale} dict={{
               nameLabel: dict.contact.nameLabel,
               namePlaceholder: dict.contact.namePlaceholder,
               emailLabel: dict.contact.emailLabel,
