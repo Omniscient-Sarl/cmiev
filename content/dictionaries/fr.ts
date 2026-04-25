@@ -76,7 +76,7 @@ const fr = {
       },
       {
         title: "Pilates",
-        description: "Cours individuels et collectifs pour renforcer le corps, améliorer la posture et la mobilité.",
+        description: "Cours individuels personnalisés pour renforcer le corps, améliorer la posture et la mobilité.",
         icon: "pilates",
       },
       {

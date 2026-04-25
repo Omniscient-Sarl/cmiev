@@ -76,7 +76,7 @@ const en = {
       },
       {
         title: "Pilates",
-        description: "Individual and group classes to strengthen the body, improve posture and mobility.",
+        description: "Personalised individual sessions to strengthen the body, improve posture and mobility.",
         icon: "pilates",
       },
       {

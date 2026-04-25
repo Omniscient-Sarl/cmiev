@@ -255,11 +255,13 @@ export default async function PractitionerPage({
               </AnimatedSection>
             )}
 
-            {/* Conditions */}
+            {/* Conditions / Certifications */}
             <AnimatedSection>
               <div className="rounded-2xl bg-[#f5f0e8] p-8">
                 <h2 className="font-heading text-xl font-bold text-foreground">
-                  {dict.practitioners.conditionsTreated}
+                  {practitioner.conditions.fr.some((c) => /certification|certifi[eé]/i.test(c))
+                    ? loc === "fr" ? "Certifications & Formations" : "Certifications & Training"
+                    : dict.practitioners.conditionsTreated}
                 </h2>
                 <ul className="mt-5 space-y-3">
                   {practitioner.conditions[loc].map((c) => (
