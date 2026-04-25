@@ -176,7 +176,7 @@ const fr = {
   },
   groupClasses: {
     title: "Cours collectifs",
-    subtitle: "Gym, Pilates et stretching du dos à Genève Eaux-Vives",
+    subtitle: "Gym, Pilates, stretching et renforcement musculaire à Genève Eaux-Vives",
     intro:
       "Vous trouverez sur cette page les horaires des cours de gym, Pilates et stretching du dos. Pour plus d\u2019informations ou pour s\u2019inscrire :",
     phone: "022/700.53.33",

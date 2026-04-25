@@ -176,7 +176,7 @@ const en = {
   },
   groupClasses: {
     title: "Group classes",
-    subtitle: "Gym, Pilates and back stretching in Geneva Eaux-Vives",
+    subtitle: "Gym, Pilates, stretching and strength training in Geneva Eaux-Vives",
     intro:
       "Find the schedules for gym, Pilates and back stretching classes on this page. For more information or to register:",
     phone: "022/700.53.33",

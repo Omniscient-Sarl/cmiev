@@ -168,33 +168,46 @@ export default async function GroupClassesPage({
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
               {locale === "fr"
-                ? "Des cours encadrés par des professionnels qualifiés, dans un environnement bienveillant et motivant."
+                ? "Des cours encadrés par des professionnelles qualifiées, dans un environnement bienveillant et motivant."
                 : "Classes led by qualified professionals, in a supportive and motivating environment."}
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {whyJoinImages.map((img, i) => (
-              <div key={img.src} className="group relative aspect-[3/4] overflow-hidden rounded-2xl">
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  sizes="(max-width: 640px) 100vw, 33vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <p className="font-heading text-lg font-bold text-white">
-                    {i === 0
-                      ? (locale === "fr" ? "Pilates en groupe" : "Group Pilates")
-                      : i === 1
-                        ? (locale === "fr" ? "Bien-être" : "Wellness")
-                        : (locale === "fr" ? "Cours collectifs" : "Group Classes")}
-                  </p>
+            {whyJoinImages.map((img, i) => {
+              const label = i === 0
+                ? (locale === "fr" ? "Pilates en petit groupe" : "Small Group Pilates")
+                : i === 1
+                  ? (locale === "fr" ? "Programme Glad" : "Glad Programme")
+                  : (locale === "fr" ? "Cours adaptés à chacun" : "Classes Adapted to Everyone");
+
+              const card = (
+                <div className="group relative aspect-[3/4] overflow-hidden rounded-2xl">
+                  <Image
+                    src={img.src}
+                    alt={img.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <p className="font-heading text-lg font-bold text-white">{label}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+
+              // Card 2 (GLAD) links to external site
+              if (i === 1) {
+                return (
+                  <a key={img.src} href="https://gladsuisse.ch/arthrose/" target="_blank" rel="noopener noreferrer">
+                    {card}
+                  </a>
+                );
+              }
+
+              return <div key={img.src}>{card}</div>;
+            })}
           </div>
         </AnimatedSection>
       </SectionWrapper>
