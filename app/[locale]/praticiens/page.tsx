@@ -27,8 +27,20 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isValidLocale(locale)) return {};
   const dict = await getDictionary(locale);
-  const title = dict.practitioners.title;
-  const description = dict.practitioners.subtitle;
+  const seoTitle: Record<Locale, string> = {
+    fr: "Nos praticiens — Centre de Médecine Intégrative des Eaux-Vives, Genève",
+    en: "Our practitioners — Centre de Médecine Intégrative des Eaux-Vives, Geneva",
+    es: "Nuestros practicantes — Centre de Médecine Intégrative des Eaux-Vives, Ginebra",
+    it: "I nostri professionisti — Centre de Médecine Intégrative des Eaux-Vives, Ginevra",
+  };
+  const seoDescription: Record<Locale, string> = {
+    fr: "Découvrez l'équipe pluridisciplinaire du CMIEV : ostéopathie, physiothérapie, psychiatrie intégrative, homéopathie et Pilates à Genève Eaux-Vives.",
+    en: "Meet the multidisciplinary team at CMIEV: osteopathy, physiotherapy, integrative psychiatry, homeopathy and Pilates in Geneva Eaux-Vives.",
+    es: "Conozca al equipo multidisciplinar del CMIEV: osteopatía, fisioterapia, psiquiatría integrativa, homeopatía y Pilates en Ginebra Eaux-Vives.",
+    it: "Scoprite il team multidisciplinare del CMIEV: osteopatia, fisioterapia, psichiatria integrativa, omeopatia e Pilates a Ginevra Eaux-Vives.",
+  };
+  const title = seoTitle[locale];
+  const description = seoDescription[locale];
   const ogImageUrl = `https://cmiev.ch${practitionerPhotos[0].src}`;
   return {
     title,

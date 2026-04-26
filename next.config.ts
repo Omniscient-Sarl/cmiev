@@ -21,6 +21,25 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/therapeutes",
+        destination: "/fr/praticiens",
+        permanent: true,
+      },
+      {
+        source: "/fr/therapeutes",
+        destination: "/fr/praticiens",
+        permanent: true,
+      },
+      {
+        source: "/:locale/therapeutes",
+        destination: "/:locale/praticiens",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
