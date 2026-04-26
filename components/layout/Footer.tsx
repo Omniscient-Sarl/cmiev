@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Dictionary } from "@/lib/dictionaries";
 import type { Locale } from "@/lib/i18n";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 interface FooterProps {
   locale: Locale;
@@ -173,11 +174,12 @@ export function Footer({ locale, dict }: FooterProps) {
 
       {/* Bottom bar */}
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center gap-2 px-4 py-6 text-center text-sm sm:flex-row sm:justify-between sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center gap-3 px-4 py-6 text-center text-sm sm:flex-row sm:justify-between sm:px-6 lg:px-8">
           <p>
             &copy; {year} {dict.footer.copyright}.{" "}
             {dict.footer.allRightsReserved}.
           </p>
+          <LanguageSwitcher locale={locale} />
           <p>
             {dict.footer.developedBy}{" "}
             <a
