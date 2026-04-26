@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { isValidLocale, type Locale } from "@/lib/i18n";
+import { isValidLocale, ogLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { getVisiblePractitioners } from "@/lib/db/queries";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
@@ -35,14 +35,14 @@ export async function generateMetadata({
     description,
     alternates: {
       canonical: `https://cmiev.ch/${locale}/praticiens`,
-      languages: { fr: "https://cmiev.ch/fr/praticiens", en: "https://cmiev.ch/en/praticiens" },
+      languages: { fr: "https://cmiev.ch/fr/praticiens", en: "https://cmiev.ch/en/praticiens", es: "https://cmiev.ch/es/praticiens", it: "https://cmiev.ch/it/praticiens" },
     },
     openGraph: {
       title,
       description,
       url: `https://cmiev.ch/${locale}/praticiens`,
       siteName: "CMIEV",
-      locale: locale === "fr" ? "fr_CH" : "en_GB",
+      locale: ogLocale(locale as Locale),
       type: "website",
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }],
     },

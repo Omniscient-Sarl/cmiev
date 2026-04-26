@@ -38,8 +38,12 @@ export const practitioners = pgTable("practitioners", {
   nameEn: text("name_en").notNull(),
   titleFr: text("title_fr").notNull(),
   titleEn: text("title_en").notNull(),
+  titleEs: text("title_es"),
+  titleIt: text("title_it"),
   bioFr: text("bio_fr"),
   bioEn: text("bio_en"),
+  bioEs: text("bio_es"),
+  bioIt: text("bio_it"),
   specialtiesFr: text("specialties_fr")
     .array()
     .default([])
@@ -48,6 +52,12 @@ export const practitioners = pgTable("practitioners", {
     .array()
     .default([])
     .notNull(),
+  specialtiesEs: text("specialties_es")
+    .array()
+    .default([]),
+  specialtiesIt: text("specialties_it")
+    .array()
+    .default([]),
   conditionsFr: text("conditions_fr")
     .array()
     .default([])
@@ -56,6 +66,12 @@ export const practitioners = pgTable("practitioners", {
     .array()
     .default([])
     .notNull(),
+  conditionsEs: text("conditions_es")
+    .array()
+    .default([]),
+  conditionsIt: text("conditions_it")
+    .array()
+    .default([]),
   spokenLanguages: text("spoken_languages")
     .array()
     .default([])

@@ -63,7 +63,7 @@ export function contactPageJsonLd(locale: Locale) {
   return {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    name: locale === "fr" ? "Contact — CMIEV" : "Contact — CMIEV",
+    name: { fr: "Contact — CMIEV", en: "Contact — CMIEV", es: "Contacto — CMIEV", it: "Contatto — CMIEV" }[locale],
     url: `${BASE_URL}/${locale}/contact`,
     mainEntity: {
       "@type": "MedicalOrganization",

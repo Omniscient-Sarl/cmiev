@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { isValidLocale, type Locale } from "@/lib/i18n";
+import { isValidLocale, ogLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { Hero } from "@/components/sections/Hero";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
@@ -26,9 +26,9 @@ export async function generateMetadata({
     description,
     alternates: {
       canonical: `https://cmiev.ch/${locale}/cours-collectifs`,
-      languages: { fr: "https://cmiev.ch/fr/cours-collectifs", en: "https://cmiev.ch/en/cours-collectifs" },
+      languages: { fr: "https://cmiev.ch/fr/cours-collectifs", en: "https://cmiev.ch/en/cours-collectifs", es: "https://cmiev.ch/es/cours-collectifs", it: "https://cmiev.ch/it/cours-collectifs" },
     },
-    openGraph: { title, description, url: `https://cmiev.ch/${locale}/cours-collectifs`, siteName: "CMIEV", locale: locale === "fr" ? "fr_CH" : "en_GB", type: "website", images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }] },
+    openGraph: { title, description, url: `https://cmiev.ch/${locale}/cours-collectifs`, siteName: "CMIEV", locale: ogLocale(locale as Locale), type: "website", images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }] },
     twitter: { card: "summary_large_image", title, description, images: [ogImageUrl] },
   };
 }
@@ -128,7 +128,7 @@ export default async function GroupClassesPage({
           <div className="text-center mb-12">
             <div className="mx-auto mb-4 h-1 w-16 rounded-full bg-accent" aria-hidden="true" />
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold tracking-tight text-foreground">
-              {locale === "fr" ? "Horaires des cours" : "Class Schedule"}
+              {{ fr: "Horaires des cours", en: "Class Schedule", es: "Horarios de clases", it: "Orari dei corsi" }[locale as Locale]}
             </h2>
           </div>
 
@@ -164,22 +164,21 @@ export default async function GroupClassesPage({
           <div className="text-center mb-12">
             <div className="mx-auto mb-4 h-1 w-16 rounded-full bg-primary" aria-hidden="true" />
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold tracking-tight text-foreground">
-              {locale === "fr" ? "Pourquoi nous rejoindre" : "Why Join Us"}
+              {{ fr: "Pourquoi nous rejoindre", en: "Why Join Us", es: "Por qué unirse", it: "Perché unirsi" }[locale as Locale]}
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-              {locale === "fr"
-                ? "Des cours encadrés par des professionnelles qualifiées, dans un environnement bienveillant et motivant."
-                : "Classes led by qualified professionals, in a supportive and motivating environment."}
+              {{ fr: "Des cours encadrés par des professionnelles qualifiées, dans un environnement bienveillant et motivant.", en: "Classes led by qualified professionals, in a supportive and motivating environment.", es: "Clases dirigidas por profesionales cualificadas, en un entorno acogedor y motivador.", it: "Corsi tenuti da professioniste qualificate, in un ambiente accogliente e motivante." }[locale as Locale]}
             </p>
           </div>
 
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {whyJoinImages.map((img, i) => {
-              const label = i === 0
-                ? (locale === "fr" ? "Pilates en petit groupe" : "Small Group Pilates")
-                : i === 1
-                  ? (locale === "fr" ? "Programme Glad" : "Glad Programme")
-                  : (locale === "fr" ? "Cours adaptés à chacun" : "Classes Adapted to Everyone");
+              const labels = [
+                { fr: "Pilates en petit groupe", en: "Small Group Pilates", es: "Pilates en grupo pequeño", it: "Pilates in piccolo gruppo" },
+                { fr: "Programme Glad", en: "Glad Programme", es: "Programa Glad", it: "Programma Glad" },
+                { fr: "Cours adaptés à chacun", en: "Classes Adapted to Everyone", es: "Clases adaptadas a cada uno", it: "Corsi adattati a ciascuno" },
+              ];
+              const label = labels[i][locale as Locale];
 
               const card = (
                 <div className="group relative aspect-[3/4] overflow-hidden rounded-2xl">
@@ -233,7 +232,7 @@ export default async function GroupClassesPage({
               </span>
               <div>
                 <h2 className="font-heading text-xl font-bold text-white sm:text-2xl">
-                  {locale === "fr" ? "Programme GLAD" : "GLAD Programme"}
+                  {{ fr: "Programme GLAD", en: "GLAD Programme", es: "Programa GLAD", it: "Programma GLAD" }[locale as Locale]}
                 </h2>
                 <p className="mt-2 text-white/80 leading-relaxed">
                   {dict.groupClasses.gladNote}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { isValidLocale, type Locale } from "@/lib/i18n";
+import { isValidLocale, ogLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { getVisiblePractitioners, getContentValue } from "@/lib/db/queries";
 import { Hero } from "@/components/sections/Hero";
@@ -65,14 +65,14 @@ export async function generateMetadata({
     description: dict.metadata.siteDescription,
     alternates: {
       canonical: `https://cmiev.ch/${locale}`,
-      languages: { fr: "https://cmiev.ch/fr", en: "https://cmiev.ch/en" },
+      languages: { fr: "https://cmiev.ch/fr", en: "https://cmiev.ch/en", es: "https://cmiev.ch/es", it: "https://cmiev.ch/it" },
     },
     openGraph: {
       title: dict.metadata.siteName,
       description: dict.metadata.siteDescription,
       url: `https://cmiev.ch/${locale}`,
       siteName: "CMIEV",
-      locale: locale === "fr" ? "fr_CH" : "en_GB",
+      locale: ogLocale(locale as Locale),
       type: "website",
       images: [{ url: ogImageUrl, width: 1200, height: 630, alt: dict.metadata.siteName }],
     },
@@ -128,11 +128,10 @@ export default async function HomePage({
       <section className="relative z-10 -mt-12 sm:-mt-20">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
-            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white shadow-xl sm:grid-cols-4">
+            <div className="grid grid-cols-3 gap-px overflow-hidden rounded-2xl bg-white shadow-xl">
               {[
                 { value: "8", label: dict.home.statsSpecialists },
                 { value: "Genève", label: dict.home.statsLocation },
-                { value: "7+", label: dict.home.statsExperience },
                 { value: "100%", label: dict.home.statsApproach },
               ].map((stat) => (
                 <div

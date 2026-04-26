@@ -132,7 +132,7 @@ export function Footer({ locale, dict }: FooterProps) {
 
             {/* Map */}
             <h4 className="font-heading text-lg font-semibold text-white pt-2">
-              {locale === "fr" ? "Nous trouver" : "Find us"}
+              {{ fr: "Nous trouver", en: "Find us", es: "Cómo llegar", it: "Come trovarci" }[locale as Locale]}
             </h4>
             <a
               href="https://maps.google.com/?q=Rue+des+Eaux-Vives+3,+1207+Genève"
@@ -147,7 +147,7 @@ export function Footer({ locale, dict }: FooterProps) {
                 style={{ border: 0 }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title={locale === "fr" ? "Localisation du CMIEV" : "CMIEV location"}
+                title={{ fr: "Localisation du CMIEV", en: "CMIEV location", es: "Ubicación del CMIEV", it: "Posizione del CMIEV" }[locale as Locale]}
                 className="pointer-events-none"
               />
               {/* Red pin overlay */}

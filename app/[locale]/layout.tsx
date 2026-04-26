@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Playfair_Display, Source_Sans_3 } from "next/font/google";
-import { isValidLocale, type Locale } from "@/lib/i18n";
+import { isValidLocale, ogLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -46,7 +46,7 @@ export async function generateMetadata({
       description: dict.metadata.siteDescription,
       url: `https://cmiev.ch/${locale}`,
       siteName: "CMIEV",
-      locale: locale === "fr" ? "fr_CH" : "en_GB",
+      locale: ogLocale(locale as Locale),
       type: "website",
       images: [{ url: "https://cmiev.ch/og-default.jpg", width: 1200, height: 630, alt: dict.metadata.siteName }],
     },

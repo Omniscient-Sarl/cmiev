@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { isValidLocale, type Locale } from "@/lib/i18n";
+import { isValidLocale, ogLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import Image from "next/image";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
@@ -25,9 +25,9 @@ export async function generateMetadata({
     description,
     alternates: {
       canonical: `https://cmiev.ch/${locale}/contact`,
-      languages: { fr: "https://cmiev.ch/fr/contact", en: "https://cmiev.ch/en/contact" },
+      languages: { fr: "https://cmiev.ch/fr/contact", en: "https://cmiev.ch/en/contact", es: "https://cmiev.ch/es/contact", it: "https://cmiev.ch/it/contact" },
     },
-    openGraph: { title, description, url: `https://cmiev.ch/${locale}/contact`, siteName: "CMIEV", locale: locale === "fr" ? "fr_CH" : "en_GB", type: "website", images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }] },
+    openGraph: { title, description, url: `https://cmiev.ch/${locale}/contact`, siteName: "CMIEV", locale: ogLocale(locale as Locale), type: "website", images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }] },
     twitter: { card: "summary_large_image", title, description, images: [ogImageUrl] },
   };
 }
@@ -99,8 +99,8 @@ export default async function ContactPage({
               emailPlaceholder: dict.contact.emailPlaceholder,
               phoneLabel: dict.contact.phoneLabel,
               phonePlaceholder: dict.contact.phonePlaceholder,
-              practitionerLabel: locale === "fr" ? "Praticien" : "Practitioner",
-              practitionerPlaceholder: locale === "fr" ? "Choisir un praticien" : "Choose a practitioner",
+              practitionerLabel: { fr: "Praticien", en: "Practitioner", es: "Profesional", it: "Professionista" }[locale] ?? "Practitioner",
+              practitionerPlaceholder: { fr: "Choisir un praticien", en: "Choose a practitioner", es: "Elegir un profesional", it: "Scegliere un professionista" }[locale] ?? "Choose a practitioner",
               messageLabel: dict.contact.messageLabel,
               messagePlaceholder: dict.contact.messagePlaceholder,
               submit: dict.contact.submit,
@@ -134,7 +134,7 @@ export default async function ContactPage({
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-foreground">
-                      {locale === "fr" ? "Adresse" : "Address"}
+                      {{ fr: "Adresse", en: "Address", es: "Dirección", it: "Indirizzo" }[locale as Locale]}
                     </p>
                     <p className="mt-1 text-sm text-muted-foreground">{dict.contact.address}</p>
                   </div>

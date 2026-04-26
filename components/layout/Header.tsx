@@ -42,8 +42,12 @@ export function Header({ locale, dict }: HeaderProps) {
     { href: `/${locale}/contact`, label: dict.nav.contact },
   ];
 
-  const switchLocale = locale === "fr" ? "en" : "fr";
-  const switchPath = pathname.replace(`/${locale}`, `/${switchLocale}`);
+  const localeOptions = [
+    { code: "fr" as const, label: "FR", ariaLabel: "Français" },
+    { code: "en" as const, label: "EN", ariaLabel: "English" },
+    { code: "es" as const, label: "ES", ariaLabel: "Español" },
+    { code: "it" as const, label: "IT", ariaLabel: "Italiano" },
+  ];
 
   return (
     <>
@@ -93,32 +97,22 @@ export function Header({ locale, dict }: HeaderProps) {
 
             {/* Language switcher — pill toggle */}
             <div className="ml-4 flex items-center rounded-full border border-border bg-secondary/60 p-0.5">
-              <Link
-                href={locale === "fr" ? "#" : switchPath}
-                className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
-                  locale === "fr"
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-                aria-label="Français"
-                aria-current={locale === "fr" ? "true" : undefined}
-                onClick={locale === "fr" ? (e) => e.preventDefault() : undefined}
-              >
-                FR
-              </Link>
-              <Link
-                href={locale === "en" ? "#" : switchPath}
-                className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
-                  locale === "en"
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-                aria-label="English"
-                aria-current={locale === "en" ? "true" : undefined}
-                onClick={locale === "en" ? (e) => e.preventDefault() : undefined}
-              >
-                EN
-              </Link>
+              {localeOptions.map((opt) => (
+                <Link
+                  key={opt.code}
+                  href={locale === opt.code ? "#" : pathname.replace(`/${locale}`, `/${opt.code}`)}
+                  className={`rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
+                    locale === opt.code
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                  aria-label={opt.ariaLabel}
+                  aria-current={locale === opt.code ? "true" : undefined}
+                  onClick={locale === opt.code ? (e) => e.preventDefault() : undefined}
+                >
+                  {opt.label}
+                </Link>
+              ))}
             </div>
           </nav>
 
@@ -209,30 +203,21 @@ export function Header({ locale, dict }: HeaderProps) {
           {/* Mobile language switcher */}
           <div className="shrink-0 border-t border-border px-8 py-6">
             <div className="flex items-center justify-center rounded-full border border-border bg-secondary/60 p-1">
-              <Link
-                href={locale === "fr" ? "#" : switchPath}
-                onClick={locale === "fr" ? (e) => e.preventDefault() : closeMobile}
-                className={`flex-1 rounded-full py-2 text-center text-sm font-semibold uppercase tracking-wider transition-all duration-200 ${
-                  locale === "fr"
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-                aria-label="Français"
-              >
-                Français
-              </Link>
-              <Link
-                href={locale === "en" ? "#" : switchPath}
-                onClick={locale === "en" ? (e) => e.preventDefault() : closeMobile}
-                className={`flex-1 rounded-full py-2 text-center text-sm font-semibold uppercase tracking-wider transition-all duration-200 ${
-                  locale === "en"
-                    ? "bg-primary text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-                aria-label="English"
-              >
-                English
-              </Link>
+              {localeOptions.map((opt) => (
+                <Link
+                  key={opt.code}
+                  href={locale === opt.code ? "#" : pathname.replace(`/${locale}`, `/${opt.code}`)}
+                  onClick={locale === opt.code ? (e) => e.preventDefault() : closeMobile}
+                  className={`flex-1 rounded-full py-2 text-center text-sm font-semibold uppercase tracking-wider transition-all duration-200 ${
+                    locale === opt.code
+                      ? "bg-primary text-primary-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                  aria-label={opt.ariaLabel}
+                >
+                  {opt.label}
+                </Link>
+              ))}
             </div>
           </div>
         </nav>

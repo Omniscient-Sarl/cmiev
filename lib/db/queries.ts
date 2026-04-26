@@ -15,20 +15,35 @@ import {
 function dbRowToPractitioner(row: typeof practitionersTable.$inferSelect): Practitioner {
   return {
     slug: row.slug,
-    // DB stores separate fr/en names; static data has a single `name`.
-    // We use the French name as canonical (it's the same person name in both locales).
     name: row.nameFr,
-    title: { fr: row.titleFr, en: row.titleEn },
+    title: {
+      fr: row.titleFr,
+      en: row.titleEn,
+      es: row.titleEs ?? row.titleFr,
+      it: row.titleIt ?? row.titleFr,
+    },
     phone: row.phone ?? "",
     email: row.email ?? undefined,
     bio: {
       fr: row.bioFr ? row.bioFr.split("\n\n") : [],
       en: row.bioEn ? row.bioEn.split("\n\n") : [],
+      es: row.bioEs ? row.bioEs.split("\n\n") : (row.bioFr ? row.bioFr.split("\n\n") : []),
+      it: row.bioIt ? row.bioIt.split("\n\n") : (row.bioFr ? row.bioFr.split("\n\n") : []),
     },
-    specialties: { fr: row.specialtiesFr, en: row.specialtiesEn },
-    conditions: { fr: row.conditionsFr, en: row.conditionsEn },
+    specialties: {
+      fr: row.specialtiesFr,
+      en: row.specialtiesEn,
+      es: row.specialtiesEs ?? row.specialtiesFr,
+      it: row.specialtiesIt ?? row.specialtiesFr,
+    },
+    conditions: {
+      fr: row.conditionsFr,
+      en: row.conditionsEn,
+      es: row.conditionsEs ?? row.conditionsFr,
+      it: row.conditionsIt ?? row.conditionsFr,
+    },
     image: row.photoUrl ?? undefined,
-    seoKeywords: { fr: [], en: [] },
+    seoKeywords: { fr: [], en: [], es: [], it: [] },
     spokenLanguages: row.spokenLanguages,
   };
 }

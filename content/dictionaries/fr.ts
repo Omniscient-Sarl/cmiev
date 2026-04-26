@@ -44,8 +44,7 @@ const fr = {
     ],
     statsSpecialists: "praticiens spécialisés",
     statsLocation: "Genève Eaux-Vives",
-    statsExperience: "ans d'expertise",
-    statsApproach: "approche intégrative",
+statsApproach: "approche intégrative",
     specialtiesTitle: "Nos spécialités",
     specialtiesSubtitle: "Une prise en charge complète et personnalisée",
     specialties: [

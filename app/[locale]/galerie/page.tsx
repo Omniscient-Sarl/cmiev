@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { isValidLocale, type Locale } from "@/lib/i18n";
+import { isValidLocale, ogLocale, type Locale } from "@/lib/i18n";
 import { getDictionary } from "@/lib/dictionaries";
 import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { GalleryGrid } from "@/components/sections/GalleryGrid";
@@ -39,9 +39,9 @@ export async function generateMetadata({
     description,
     alternates: {
       canonical: `https://cmiev.ch/${locale}/galerie`,
-      languages: { fr: "https://cmiev.ch/fr/galerie", en: "https://cmiev.ch/en/galerie" },
+      languages: { fr: "https://cmiev.ch/fr/galerie", en: "https://cmiev.ch/en/galerie", es: "https://cmiev.ch/es/galerie", it: "https://cmiev.ch/it/galerie" },
     },
-    openGraph: { title, description, url: `https://cmiev.ch/${locale}/galerie`, siteName: "CMIEV", locale: locale === "fr" ? "fr_CH" : "en_GB", type: "website", images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }] },
+    openGraph: { title, description, url: `https://cmiev.ch/${locale}/galerie`, siteName: "CMIEV", locale: ogLocale(locale as Locale), type: "website", images: [{ url: ogImageUrl, width: 1200, height: 630, alt: title }] },
     twitter: { card: "summary_large_image", title, description, images: [ogImageUrl] },
   };
 }

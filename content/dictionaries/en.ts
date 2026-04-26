@@ -44,8 +44,7 @@ const en = {
     ],
     statsSpecialists: "specialised practitioners",
     statsLocation: "Geneva Eaux-Vives",
-    statsExperience: "years of expertise",
-    statsApproach: "integrative approach",
+statsApproach: "integrative approach",
     specialtiesTitle: "Our specialties",
     specialtiesSubtitle: "Comprehensive and personalised care",
     specialties: [
