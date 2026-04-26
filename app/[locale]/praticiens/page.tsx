@@ -8,16 +8,7 @@ import { SectionWrapper } from "@/components/sections/SectionWrapper";
 import { AnimatedSection } from "@/components/sections/AnimatedSection";
 import { PractitionerCard } from "@/components/sections/PractitionerCard";
 
-const practitionerPhotos = [
-  { src: "/images/praticiens/karen-aguiar.webp", name: "Karen Aguiar" },
-  { src: "/images/praticiens/elio-bosani.webp", name: "Elio Bosani" },
-  { src: "/images/praticiens/corinne-dauve.webp", name: "Dr Corinne Dauve" },
-  { src: "/images/praticiens/isaline-henry.webp", name: "Isaline Henry" },
-  { src: "/images/praticiens/beatrice-limbert.webp", name: "Béatrice Milbert" },
-  { src: "/images/praticiens/shima-sazegari.webp", name: "Shima Sazegari" },
-  { src: "/images/praticiens/severine-schwab.webp", name: "Séverine Schwab" },
-  { src: "/images/praticiens/fiorenza-toffolon.webp", name: "Fiorenza Toffolon" },
-];
+const defaultOgImage = "/images/praticiens/karen-aguiar.webp";
 
 export async function generateMetadata({
   params,
@@ -41,7 +32,7 @@ export async function generateMetadata({
   };
   const title = seoTitle[locale];
   const description = seoDescription[locale];
-  const ogImageUrl = `https://cmiev.ch${practitionerPhotos[0].src}`;
+  const ogImageUrl = `https://cmiev.ch${defaultOgImage}`;
   return {
     title,
     description,
@@ -75,23 +66,23 @@ export default async function PractitionersPage({
 
   return (
     <>
-      {/* Practitioner Mosaic Hero */}
+      {/* Practitioner Mosaic Hero — 2 rows × 4 columns */}
       <section className="relative flex h-[calc(100dvh-5rem)] overflow-hidden">
-        <div className="absolute inset-0 grid grid-cols-4 grid-rows-2 lg:grid-cols-8 lg:grid-rows-1">
-          {practitionerPhotos.map((p) => (
-            <div key={p.name} className="relative overflow-hidden">
+        <div className="absolute inset-0 grid grid-cols-2 grid-rows-4 sm:grid-cols-4 sm:grid-rows-2">
+          {allPractitioners.slice(0, 8).map((p) => (
+            <div key={p.slug} className="relative overflow-hidden">
               <Image
-                src={p.src}
+                src={p.image ?? `/images/praticiens/${p.slug}.webp`}
                 alt={p.name}
                 fill
                 className="object-cover object-top"
-                sizes="(max-width: 1024px) 25vw, 12.5vw"
+                sizes="(max-width: 640px) 50vw, 25vw"
                 priority
               />
             </div>
           ))}
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/10" />
 
         <div className="relative z-10 flex w-full flex-col justify-end px-4 pb-12 sm:px-12 sm:pb-24 lg:px-20 lg:pb-28">
           <div className="mb-4 h-px w-16 bg-accent sm:mb-6 sm:w-24" />
