@@ -66,23 +66,29 @@ export default async function PractitionersPage({
 
   return (
     <>
-      {/* Practitioner Mosaic Hero — 2 rows × 4 columns */}
+      {/* Practitioner Marquee Hero — infinite horizontal scroll */}
       <section className="relative flex h-[calc(100dvh-5rem)] overflow-hidden">
-        <div className="absolute inset-0 grid grid-cols-2 grid-rows-4 sm:grid-cols-4 sm:grid-rows-2">
-          {allPractitioners.slice(0, 8).map((p) => (
-            <div key={p.slug} className="relative overflow-hidden">
-              <Image
-                src={p.image ?? `/images/praticiens/${p.slug}.webp`}
-                alt={p.name}
-                fill
-                className="object-cover object-top"
-                sizes="(max-width: 640px) 50vw, 25vw"
-                priority
-              />
-            </div>
-          ))}
+        <div className="absolute inset-0 flex items-center">
+          <div className="flex animate-marquee">
+            {/* Double the images for seamless looping */}
+            {[...allPractitioners.slice(0, 8), ...allPractitioners.slice(0, 8)].map((p, i) => (
+              <div
+                key={`${p.slug}-${i}`}
+                className="relative h-[calc(100dvh-5rem)] w-[45vw] flex-shrink-0 sm:w-[30vw] lg:w-[22vw]"
+              >
+                <Image
+                  src={p.image ?? `/images/praticiens/${p.slug}.webp`}
+                  alt={p.name}
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw"
+                  priority={i < 8}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10" />
 
         <div className="relative z-10 flex w-full flex-col justify-end px-4 pb-12 sm:px-12 sm:pb-24 lg:px-20 lg:pb-28">
           <div className="mb-4 h-px w-16 bg-accent sm:mb-6 sm:w-24" />
