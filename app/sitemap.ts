@@ -44,5 +44,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
+  // llms.txt — AI-assistant discovery file (not locale-specific)
+  entries.push({
+    url: `${BASE_URL}/llms.txt`,
+    lastModified: now,
+    changeFrequency: "weekly",
+    priority: 0.5,
+  });
+
   return entries;
 }
